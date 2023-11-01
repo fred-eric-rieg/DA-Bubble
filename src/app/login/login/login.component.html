@@ -1,0 +1,20 @@
+<section class="mat-typography app-frame mat-app-background">
+
+    <div class="login-box">
+        <h1>Login Area</h1>
+        <mat-form-field>
+            <mat-label>Email</mat-label>
+            <input matInput type="email" [(ngModel)]="credentials.email" required="">
+        </mat-form-field>
+
+        <mat-form-field>
+            <mat-label>Password</mat-label>
+            <input matInput type="password" [(ngModel)]="credentials.password" required="">
+        </mat-form-field>
+
+        <button mat-button aria-label="Send" [disabled]="!validate()" [appLoginEmailPassword]="credentials">
+            <mat-icon>send</mat-icon> Login
+        </button>
+    </div>
+
+</section>

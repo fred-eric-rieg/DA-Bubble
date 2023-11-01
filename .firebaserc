@@ -1,0 +1,14 @@
+{
+  "targets": {
+    "db-bubble": {
+      "hosting": {
+        "DA-Bubble": [
+          "db-bubble"
+        ]
+      }
+    }
+  },
+  "projects": {
+    "default": "db-bubble"
+  }
+}
