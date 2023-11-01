@@ -9,7 +9,22 @@ name: Deploy to Firebase Hosting on merge
 jobs:
   build_and_deploy:
     runs-on: ubuntu-latest
+
     steps:
+      - name: Set up Node.js
+        uses: actions/setup-node@v2
+        with:
+          node-version: 14 # Choose the Node.js version you need
+  
+      - name: Install Angular CLI
+        run: npm install -g @angular/cli
+  
+      - name: Install dependencies
+        run: npm install
+  
+      - name: Build
+        run: npm run build
+
       - uses: actions/checkout@v3
       - run: npm run build
       - uses: FirebaseExtended/action-hosting-deploy@v0
