@@ -1,10 +1,15 @@
-import { Directive, ElementRef, HostListener, Input } from '@angular/core';
-import { getAuth, createUserWithEmailAndPassword, signInWithEmailAndPassword } from "firebase/auth";
+import { Directive, ElementRef, HostListener, Input, inject } from '@angular/core';
+import { Auth } from '@angular/fire/auth';
+import { getAuth, signInWithEmailAndPassword } from "firebase/auth";
+
+
 
 @Directive({
   selector: '[appLoginEmailPassword]'
 })
 export class LoginEmailPasswordDirective {
+  private auth: Auth = inject(Auth);
+
 
   @Input('appLoginEmailPassword') credentials = { email: '', password: '' };
 
@@ -13,20 +18,31 @@ export class LoginEmailPasswordDirective {
   }
 
 
-  @HostListener('click') async onClick() {
-    let auth = getAuth();
-
-    let response = await signInWithEmailAndPassword(auth, this.credentials.email, this.credentials.password)
-      .then((userCredential) => {
-        // Signed in 
-        const user = userCredential.user;
-        // ...
-      })
-      .catch((error) => {
-        const errorCode = error.code;
-        const errorMessage = error.message;
-      });
-
-      console.log(response);
+  @HostListener('click')
+    async onClick() {
+      const auth = getAuth();
+      signInWithEmailAndPassword(auth, this.credentials.email, this.credentials.password)
+        .then((userCredential) => {
+          // Signed in 
+          const user = userCredential.user;
+          console.log(user);
+          let message = document.body.appendChild(document.createElement('div'));
+          message.textContent = 'You are logged in!';
+          message.setAttribute('style', 'position: fixed; top: 50%; left: calc(50% - 116px); background-color: #000; color: #fff; padding: 1rem; width: 200px; border-radius: 10px;');
+          setTimeout(() => {
+            message.remove();
+          }, 3000);
+          // ...
+        })
+        .catch((error) => {
+          const errorCode = error.code;
+          const errorMessage = error.message;
+          let message = document.body.appendChild(document.createElement('div'));
+          message.textContent = 'Wrong credentials!';
+          message.setAttribute('style', 'position: fixed; top: 50%; left:  calc(50% - 116px); background-color: #000; color: #fff; padding: 1rem; width: 200px; border-radius: 10px;');
+          setTimeout(() => {
+            message.remove();
+          }, 3000);
+        });
   }
 }

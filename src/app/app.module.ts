@@ -18,14 +18,6 @@ import { getAuth, provideAuth } from '@angular/fire/auth';
 import { getDatabase, provideDatabase } from '@angular/fire/database';
 import { environment } from 'src/environments/environment.development';
 
-const config = {
-  apiKey: environment.firebase.apiKey,
-  authDomain: environment.firebase.authDomain,
-  projectId: environment.firebase.projectId,
-  storageBucket: environment.firebase.storageBucket,
-  messagingSenderId: environment.firebase.messagingSenderId,
-  appId: environment.firebase.appId
-};
 
 @NgModule({
   declarations: [
@@ -49,9 +41,10 @@ const config = {
     MatFormFieldModule,
     MatInputModule,
     MatIconModule,
-    provideFirebaseApp(() => initializeApp(config)),
+    provideFirebaseApp(() => initializeApp(environment.firebase)),
     provideAuth(() => getAuth()),
-    provideDatabase(() => getDatabase())
+    provideDatabase(() => getDatabase()),
+    
   ],
   providers: [],
   bootstrap: [AppComponent]
