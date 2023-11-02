@@ -5,7 +5,7 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { ServiceWorkerModule } from '@angular/service-worker';
-import { LoginComponent } from './login/login/login.component';
+import { LoginComponent } from './components/login/login/login.component';
 import { LoginEmailPasswordDirective } from './directives/login-email-password.directive';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 

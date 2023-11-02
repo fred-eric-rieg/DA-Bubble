@@ -1,5 +1,6 @@
 import { Directive, ElementRef, HostListener, Input, inject } from '@angular/core';
 import { Auth } from '@angular/fire/auth';
+import { Router } from '@angular/router';
 import { getAuth, signInWithEmailAndPassword } from "firebase/auth";
 
 
@@ -13,9 +14,10 @@ export class LoginEmailPasswordDirective {
 
   @Input('appLoginEmailPassword') credentials = { email: '', password: '' };
 
-  constructor(private el: ElementRef) {
-
-  }
+  constructor(
+    private el: ElementRef,
+    private router: Router
+    ) {}
 
 
   @HostListener('click')
@@ -32,6 +34,7 @@ export class LoginEmailPasswordDirective {
           setTimeout(() => {
             message.remove();
           }, 3000);
+          this.router.navigate(['/dashboard']);
           // ...
         })
         .catch((error) => {
