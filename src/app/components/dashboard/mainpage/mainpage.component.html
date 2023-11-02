@@ -1,1 +1,9 @@
-<p>mainpage works!</p>
+<section class="mat-typography app-frame mat-app-background">
+    <h1>Dashboard</h1>
+    <p>Welcome {{authService.isLoggedIn()?.email}}</p>
+
+    <button mat-raised-button color="primary" aria-label="Send" (click)="logOut()">
+        <mat-icon>exit_to_app</mat-icon> Logout
+    </button>
+</section>
+

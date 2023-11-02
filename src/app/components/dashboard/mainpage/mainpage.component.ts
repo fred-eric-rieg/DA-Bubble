@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { AuthService } from 'src/app/shared/services/auth.service';
 
 @Component({
   selector: 'app-mainpage',
@@ -6,5 +7,11 @@ import { Component } from '@angular/core';
   styleUrls: ['./mainpage.component.scss']
 })
 export class MainpageComponent {
+
+  constructor(public authService: AuthService) { }
+
+  logOut() {
+    this.authService.signOut();
+  }
 
 }
