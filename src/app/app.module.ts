@@ -17,13 +17,15 @@ import { initializeApp, provideFirebaseApp } from '@angular/fire/app';
 import { getAuth, provideAuth } from '@angular/fire/auth';
 import { getDatabase, provideDatabase } from '@angular/fire/database';
 import { environment } from 'src/environments/environment.development';
+import { MainpageComponent } from './components/dashboard/mainpage/mainpage.component';
 
 
 @NgModule({
   declarations: [
     AppComponent,
     LoginComponent,
-    LoginEmailPasswordDirective
+    LoginEmailPasswordDirective,
+    MainpageComponent
   ],
   imports: [
     BrowserModule,
