@@ -25,6 +25,7 @@ export class AuthService {
         const errorMessage = error.message;
         this.writeMessage('Login failed!');
       });
+    return response;
   }
 
 

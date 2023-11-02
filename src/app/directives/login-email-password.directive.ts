@@ -19,7 +19,9 @@ export class LoginEmailPasswordDirective {
   @HostListener('click')
     async onClick() {
       const auth = getAuth();
-      await this.authService.signInNormal(auth, this.credentials.email, this.credentials.password);
-      this.router.navigate(['/dashboard']);
+      let response = await this.authService.signInNormal(auth, this.credentials.email, this.credentials.password);
+      if (response) {
+        this.router.navigate(['/dashboard']);
+      }
   }
 }
