@@ -1,9 +1,9 @@
-<section class="mat-typography app-frame mat-app-background">
-    <h1>Dashboard</h1>
-    <p>Welcome {{authService.isLoggedIn()?.email}}</p>
+<app-toolbar></app-toolbar>
+<div class="main">
+    <app-sidenav></app-sidenav>
+    <section class="mat-typography app-frame mat-app-background">
+        <h1>Dashboard</h1>
+    </section>
+</div>
 
-    <button mat-raised-button color="primary" aria-label="Send" (click)="logOut()">
-        <mat-icon>exit_to_app</mat-icon> Logout
-    </button>
-</section>
 

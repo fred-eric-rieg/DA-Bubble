@@ -40,7 +40,7 @@ export class AuthService {
   writeMessage(text: string) {
     let message = document.body.appendChild(document.createElement('div'));
     message.textContent = text;
-    message.setAttribute('style', 'position: fixed; top: 10%; left: calc(50% - 116px); background-color: #000; color: #fff; padding: 1rem; width: 200px; border-radius: 10px; text-align: center; z-index: 999;');
+    message.setAttribute('style', 'position: fixed; bottom: 10%; left: calc(50% - 116px); background-color: #000; color: #fff; padding: 1rem; width: 200px; border-radius: 10px; text-align: center; z-index: 999;');
     setTimeout(() => {
       message.remove();
     }, 3000);

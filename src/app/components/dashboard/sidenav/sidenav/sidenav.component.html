@@ -1,0 +1,29 @@
+<mat-drawer-container class="example-container" autosize>
+    <mat-drawer #drawer class="example-sidenav" mode="side">
+        <div class="btn-box">
+            <button mat-button>
+                <mat-icon>message</mat-icon>
+                Threads
+            </button>
+    
+            <button mat-button>
+                <mat-icon>contact_mail</mat-icon>
+                Contacts
+            </button>
+        </div>
+        
+
+        <div class="line"></div>
+
+        <app-channel></app-channel>
+        
+    </mat-drawer>
+
+    <div class="example-sidenav-content">
+        <button type="button" mat-button (click)="drawer.toggle(); toggled = !toggled">
+            <mat-icon *ngIf="toggled">chevron_left</mat-icon>
+            <mat-icon *ngIf="!toggled">chevron_right</mat-icon>
+        </button>
+    </div>
+
+</mat-drawer-container>

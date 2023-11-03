@@ -13,12 +13,19 @@ import { MatButtonModule } from '@angular/material/button';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { MatIconModule } from '@angular/material/icon';
+import { MatToolbarModule } from '@angular/material/toolbar';
+import { MatSidenavModule } from '@angular/material/sidenav';
+import { MatTreeModule } from '@angular/material/tree';
+
 import { initializeApp, provideFirebaseApp } from '@angular/fire/app';
 import { getAuth, provideAuth } from '@angular/fire/auth';
 import { getDatabase, provideDatabase } from '@angular/fire/database';
 import { environment } from 'src/environments/environment.development';
 import { MainpageComponent } from './components/dashboard/mainpage/mainpage.component';
 import { PageNotFoundComponent } from './components/errors/page-not-found/page-not-found.component';
+import { ToolbarComponent } from './components/dashboard/toolbar/toolbar/toolbar.component';
+import { SidenavComponent } from './components/dashboard/sidenav/sidenav/sidenav.component';
+import { ChannelComponent } from './components/dashboard/sidenav/channels/channel.component';
 
 
 @NgModule({
@@ -27,7 +34,10 @@ import { PageNotFoundComponent } from './components/errors/page-not-found/page-n
     LoginComponent,
     LoginEmailPasswordDirective,
     MainpageComponent,
-    PageNotFoundComponent
+    PageNotFoundComponent,
+    ToolbarComponent,
+    SidenavComponent,
+    ChannelComponent,
   ],
   imports: [
     BrowserModule,
@@ -45,6 +55,9 @@ import { PageNotFoundComponent } from './components/errors/page-not-found/page-n
     MatFormFieldModule,
     MatInputModule,
     MatIconModule,
+    MatToolbarModule,
+    MatSidenavModule,
+    MatTreeModule,
     provideFirebaseApp(() => initializeApp(environment.firebase)),
     provideAuth(() => getAuth()),
     provideDatabase(() => getDatabase()),
