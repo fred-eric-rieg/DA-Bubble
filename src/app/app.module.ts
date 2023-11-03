@@ -18,6 +18,7 @@ import { getAuth, provideAuth } from '@angular/fire/auth';
 import { getDatabase, provideDatabase } from '@angular/fire/database';
 import { environment } from 'src/environments/environment.development';
 import { MainpageComponent } from './components/dashboard/mainpage/mainpage.component';
+import { PageNotFoundComponent } from './components/errors/page-not-found/page-not-found.component';
 
 
 @NgModule({
@@ -25,7 +26,8 @@ import { MainpageComponent } from './components/dashboard/mainpage/mainpage.comp
     AppComponent,
     LoginComponent,
     LoginEmailPasswordDirective,
-    MainpageComponent
+    MainpageComponent,
+    PageNotFoundComponent
   ],
   imports: [
     BrowserModule,
