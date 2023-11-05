@@ -5,7 +5,7 @@ import {
   CanActivateFn
 } from '@angular/router';
 import { inject } from '@angular/core';
-import { AuthService } from './shared/services/auth.service';
+import { AuthService } from './shared/services/authentication/auth.service';
 
 export const authGuard: CanActivateFn = (route: ActivatedRouteSnapshot, state: RouterStateSnapshot) => {
   const authService = inject(AuthService);
@@ -13,10 +13,11 @@ export const authGuard: CanActivateFn = (route: ActivatedRouteSnapshot, state: R
 
   const loggedStatus = authService.isLoggedIn();
   if (!loggedStatus) {
-    return router.createUrlTree([router.parseUrl('/login')],
-    {
-      queryParams: { loggedOut: true, origUrl: state.url }
-    });
+    if (localStorage.getItem('user')) {
+      return true;
+    } else {
+      return router.navigate(['/login']);
+    }
   } else {
     return true;
   }

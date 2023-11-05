@@ -1,20 +1,39 @@
-import { Component } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { FlatTreeControl } from '@angular/cdk/tree';
 import { MatTreeFlatDataSource, MatTreeFlattener, MatTreeModule } from '@angular/material/tree';
+import { DatabaseService } from 'src/app/shared/services/database/database.service';
+import { Subscription } from 'rxjs';
 
-interface FoodNode {
+let channelSub: Subscription;
+
+interface Tree {
   name: string;
-  children?: FoodNode[];
+  children?: Leaf[];
 }
 
-const TREE_DATA: FoodNode[] = [
+interface Leaf {
+  name: string;
+}
+
+interface Channels {
+  [key: string]: Channel;
+}
+
+interface Channel {
+  name: string;
+  description: string;
+  members: string[];
+  timestamp: number;
+}
+
+const TREE_DATA: Tree[] = [
   {
     name: 'Channels',
-    children: [{ name: 'General' }, { name: 'Angular' }, { name: 'Material' }],
+    children: [],
   },
   {
     name: 'Direct Messages',
-    children: [{ name: 'Thomas' }, { name: 'John' }, { name: 'Jane' }],
+    children: [ { name: 'User 1' }, { name: 'User 2' }, { name: 'User 3' }  ],
   },
 ];
 
@@ -29,9 +48,9 @@ interface ExampleFlatNode {
   templateUrl: './channel.component.html',
   styleUrls: ['./channel.component.scss']
 })
-export class ChannelComponent {
+export class ChannelComponent implements OnInit, OnDestroy {
 
-  private _transformer = (node: FoodNode, level: number) => {
+  private _transformer = (node: Tree, level: number) => {
     return {
       expandable: !!node.children && node.children.length > 0,
       name: node.name,
@@ -53,12 +72,41 @@ export class ChannelComponent {
 
   dataSource = new MatTreeFlatDataSource(this.treeControl, this.treeFlattener);
 
-  constructor() {
+  constructor(private ds: DatabaseService) {
+
+  }
+
+
+  async ngOnInit() {
     this.dataSource.data = TREE_DATA;
+    await this.updateChannelLeafes();
+  }
+
+  ngOnDestroy() {
+    channelSub.unsubscribe();
   }
 
   hasChild = (_: number, node: ExampleFlatNode) => node.expandable;
 
+
+  /**
+   * Updates the channel leafes with the current channels from the realtime database.
+   */
+  async updateChannelLeafes() {
+    await this.ds.readAllChannels();
+    
+    channelSub = this.ds.channelSubject.subscribe((data: Channels) => {
+      const channelLeafes: Leaf[] = [];
+      for (const key in data) {
+        if (Object.prototype.hasOwnProperty.call(data, key)) {
+          const element = data[key];
+          channelLeafes.push({ name: element.name });
+        }
+      }
+      TREE_DATA[0].children = channelLeafes;
+      this.dataSource.data = TREE_DATA;
+    });
+  }
 
 
 

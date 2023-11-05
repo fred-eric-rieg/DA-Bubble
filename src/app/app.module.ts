@@ -16,6 +16,7 @@ import { MatIconModule } from '@angular/material/icon';
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatSidenavModule } from '@angular/material/sidenav';
 import { MatTreeModule } from '@angular/material/tree';
+import { MatDialogModule } from '@angular/material/dialog';
 
 import { initializeApp, provideFirebaseApp } from '@angular/fire/app';
 import { getAuth, provideAuth } from '@angular/fire/auth';
@@ -26,6 +27,8 @@ import { PageNotFoundComponent } from './components/errors/page-not-found/page-n
 import { ToolbarComponent } from './components/dashboard/toolbar/toolbar/toolbar.component';
 import { SidenavComponent } from './components/dashboard/sidenav/sidenav/sidenav.component';
 import { ChannelComponent } from './components/dashboard/sidenav/channels/channel.component';
+import { ChannelboxComponent } from './components/dashboard/channelbox/channelbox.component';
+import { AddChannelDialogComponent } from './components/dialogs/addchannel/add-channel-dialog/add-channel-dialog.component';
 
 
 @NgModule({
@@ -38,6 +41,8 @@ import { ChannelComponent } from './components/dashboard/sidenav/channels/channe
     ToolbarComponent,
     SidenavComponent,
     ChannelComponent,
+    ChannelboxComponent,
+    AddChannelDialogComponent,
   ],
   imports: [
     BrowserModule,
@@ -58,6 +63,7 @@ import { ChannelComponent } from './components/dashboard/sidenav/channels/channe
     MatToolbarModule,
     MatSidenavModule,
     MatTreeModule,
+    MatDialogModule,
     provideFirebaseApp(() => initializeApp(environment.firebase)),
     provideAuth(() => getAuth()),
     provideDatabase(() => getDatabase()),

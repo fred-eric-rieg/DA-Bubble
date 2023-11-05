@@ -32,6 +32,7 @@ export class AuthService {
   async signOut() {
     const auth = getAuth();
     await auth.signOut();
+    localStorage.removeItem('user');
     this.writeMessage('Signed out!');
     this.router.navigate(['/login']);
   }

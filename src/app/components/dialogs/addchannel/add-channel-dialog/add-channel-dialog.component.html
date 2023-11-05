@@ -1,0 +1,12 @@
+<h1 mat-dialog-title>Create new Channel</h1>
+<div mat-dialog-content>
+  <p>Got a name?</p>
+
+    <mat-form-field>
+        <input matInput placeholder="Name" [(ngModel)]="data.name">
+    </mat-form-field>
+</div>
+<div mat-dialog-actions>
+  <button mat-button mat-dialog-close>Cancel</button>
+  <button mat-button mat-dialog-close cdkFocusInitial [mat-dialog-close]="data" [disabled]="data.name.length == 0">Create</button>
+</div>

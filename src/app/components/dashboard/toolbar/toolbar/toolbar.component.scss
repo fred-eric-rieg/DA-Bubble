@@ -3,5 +3,14 @@
 }
 
 .greeting {
-    margin-right: 1rem;
+    display: none;
+}
+
+
+@media screen and (width > 800px) {
+
+    .greeting {
+        display: flex;
+        margin-right: 1rem;
+    }
 }

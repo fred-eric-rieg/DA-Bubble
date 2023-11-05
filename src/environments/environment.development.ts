@@ -6,6 +6,7 @@ export const environment = {
         projectId: "db-bubble",
         storageBucket: "db-bubble.appspot.com",
         messagingSenderId: "905704306157",
-        appId: "1:905704306157:web:edabd374c5c8366130e3e4"
+        appId: "1:905704306157:web:edabd374c5c8366130e3e4",
+        databaseURL: "https://db-bubble-default-rtdb.europe-west1.firebasedatabase.app/"
     }
 };
