@@ -6,11 +6,20 @@ import { MainpageComponent } from './components/dashboard/mainpage/mainpage.comp
 
 import { authGuard } from './auth.guard';
 import { PageNotFoundComponent } from './components/errors/page-not-found/page-not-found.component';
+import { ChannelboxComponent } from './components/dashboard/channelbox/channelbox.component';
+import { ThreadboxComponent } from './components/dashboard/threadbox/threadbox.component';
+import { ContactboxComponent } from './components/dashboard/contactbox/contactbox/contactbox.component';
 
 const routes: Routes = [
   { path: '', redirectTo:'/login', pathMatch: 'full' },
   { path: 'login', component: LoginComponent },
-  { path: 'dashboard', component: MainpageComponent, canActivate: [authGuard] },
+  { path: 'dashboard', component: MainpageComponent, 
+    children: [
+    { path: 'channel/:id', component: ChannelboxComponent, canActivate: [authGuard] },
+    { path: 'directmessage/:id', component: ChannelboxComponent, canActivate: [authGuard] },
+    { path: 'threads', component: ThreadboxComponent, canActivate: [authGuard] },
+    { path: 'contacts', component: ContactboxComponent, canActivate: [authGuard] }
+  ], canActivate: [authGuard] },
   { path: '**', component: PageNotFoundComponent }
 ];
 

@@ -1,0 +1,21 @@
+.flex-row {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    gap: 1rem;
+    padding-left: 1rem;
+    border-radius: 0.5rem;
+    border: 2px solid #424242;
+    width: 100%;
+}
+
+input {
+    height: 30px;
+    background-color: #424242;
+    border: none;
+    color: white !important;
+}
+
+input:focus {
+    outline: none;
+}

@@ -3,6 +3,8 @@
     flex-direction: row;
     height: 100vh;
     width: 100%;
+    overflow-x: hidden;
+    overflow-y: hidden;
 }
 
 section {
@@ -10,4 +12,5 @@ section {
     flex-direction: column;
     height: 100vh;
     width: 100%;
+    overflow-y: scroll;
 }

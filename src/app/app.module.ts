@@ -29,6 +29,9 @@ import { SidenavComponent } from './components/dashboard/sidenav/sidenav/sidenav
 import { ChannelComponent } from './components/dashboard/sidenav/channels/channel.component';
 import { ChannelboxComponent } from './components/dashboard/channelbox/channelbox.component';
 import { AddChannelDialogComponent } from './components/dialogs/addchannel/add-channel-dialog/add-channel-dialog.component';
+import { ThreadboxComponent } from './components/dashboard/threadbox/threadbox.component';
+import { ContactboxComponent } from './components/dashboard/contactbox/contactbox/contactbox.component';
+import { MessageInputComponent } from './components/dashboard/messageinput/message-input/message-input.component';
 
 
 @NgModule({
@@ -43,6 +46,9 @@ import { AddChannelDialogComponent } from './components/dialogs/addchannel/add-c
     ChannelComponent,
     ChannelboxComponent,
     AddChannelDialogComponent,
+    ThreadboxComponent,
+    ContactboxComponent,
+    MessageInputComponent
   ],
   imports: [
     BrowserModule,

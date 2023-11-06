@@ -1,18 +1,44 @@
-import { Component } from '@angular/core';
+import { AfterViewInit, Component, ViewChild } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { AddChannelDialogComponent } from '../../../dialogs/addchannel/add-channel-dialog/add-channel-dialog.component';
 import { DatabaseService } from 'src/app/shared/services/database/database.service';
+import { Router } from '@angular/router';
+import { ToggleService } from 'src/app/shared/services/sidenav/toggle.service';
+import { set } from '@angular/fire/database';
 
 @Component({
   selector: 'app-sidenav',
   templateUrl: './sidenav.component.html',
   styleUrls: ['./sidenav.component.scss']
 })
-export class SidenavComponent {
-  showFiller = false;
-  toggled = false;
+export class SidenavComponent implements AfterViewInit {
 
-  constructor(public dialog: MatDialog, private ds: DatabaseService) { }
+  @ViewChild('drawer') drawer: any;
+
+  constructor(
+    public dialog: MatDialog,
+    private ds: DatabaseService,
+    private router: Router,
+    public ts: ToggleService) {}
+
+
+  ngAfterViewInit() {
+    // Automatically toggle sidenav on page load.
+    setTimeout(() => {
+      this.drawer.toggle();
+      this.ts.toggled = true;
+    }, 1000);
+  }
+
+
+  openThreads() {
+    this.router.navigate(['/dashboard/threads']);
+  }
+
+
+  openContacts() {
+    this.router.navigate(['/dashboard/contacts']);
+  }
 
 
   openDialogChannel(): void {
@@ -21,6 +47,7 @@ export class SidenavComponent {
     });
 
     dialogRef.afterClosed().subscribe(result => {
+      if (!result) {return} // If the user clicks cancel, do nothing.
       let id = "channel-" + Math.random().toString(36).substring(2, 15);
       this.ds.writeChannelData(id, result.name, result.description, result.members, result.timestamp);
     });

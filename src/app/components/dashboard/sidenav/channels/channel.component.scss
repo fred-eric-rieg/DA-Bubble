@@ -1,7 +1,17 @@
 .text-align-left {
+    box-sizing: border-box;
     display: flex;
     align-items: center;
     justify-content: flex-start;
+    width: 150px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+.flex-row {
+    display: flex;
+    flex-direction: row;
 }
 
 .buffer {

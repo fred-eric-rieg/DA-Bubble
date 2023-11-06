@@ -3,7 +3,7 @@
   <p>Got a name?</p>
 
     <mat-form-field>
-        <input matInput placeholder="Name" [(ngModel)]="data.name">
+        <input matInput placeholder="max. 15 characters" [(ngModel)]="data.name" maxlength="15">
     </mat-form-field>
 </div>
 <div mat-dialog-actions>

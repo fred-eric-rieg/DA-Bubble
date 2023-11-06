@@ -14,7 +14,7 @@ export const authGuard: CanActivateFn = (route: ActivatedRouteSnapshot, state: R
   const loggedStatus = authService.isLoggedIn();
   if (!loggedStatus) {
     if (localStorage.getItem('user')) {
-      return true;
+      return true
     } else {
       return router.navigate(['/login']);
     }

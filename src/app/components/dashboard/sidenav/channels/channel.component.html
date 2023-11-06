@@ -1,21 +1,38 @@
-<mat-tree [dataSource]="dataSource" [treeControl]="treeControl">
-    <!-- This is the tree node template for leaf nodes -->
-    <mat-tree-node *matTreeNodeDef="let node" matTreeNodePadding>
-        <!-- use a disabled button to provide padding for tree leaf -->
-        <div class="buffer"></div>
-        <button mat-button class="text-align-left">
-            {{node.name}}
-        </button>
+<div>
+    <!-- Channels displayed here -->
+    <button mat-button (click)="chanExpanded = !chanExpanded">
+        <mat-icon class="mat-icon-rtl-mirror">
+            {{chanExpanded ? 'expand_more' : 'chevron_right'}}
+        </mat-icon>
+        Channels
+    </button>
 
-    </mat-tree-node>
-    <!-- This is the tree node template for expandable nodes -->
-    <mat-tree-node *matTreeNodeDef="let node;when: hasChild" matTreeNodePadding>
-        <button mat-button matTreeNodeToggle [attr.aria-label]="'Toggle ' + node.name">
-            <mat-icon class="mat-icon-rtl-mirror">
-                {{treeControl.isExpanded(node) ? 'expand_more' : 'chevron_right'}}
-            </mat-icon>
-            {{node.name}}
-        </button>
+    <div *ngIf="chanExpanded">
+        <div *ngFor="let chan of channel" class="flex-row">
+            <button mat-button disabled="" class="buffer"></button>
+            <button mat-button class="text-align-left" (click)="openChannel(chan.id)">
+                {{chan.name}}
+            </button>
+        </div>
+    </div>
+
+    <!-- Direct Messages displayed here -->
+    <button mat-button (click)="dmExpanded = !dmExpanded">
+        <mat-icon class="mat-icon-rtl-mirror">
+            {{dmExpanded ? 'expand_more' : 'chevron_right'}}
+        </mat-icon>
+        Direct Messages
+    </button>
+
+    <div *ngIf="dmExpanded">
+        <div *ngFor="let dm of directmessages" class="flex-row">
+            <button mat-button disabled="" class="buffer"></button>
+            <button mat-button class="text-align-left" (click)="openDirectMessage(dm.id)">
+                {{dm.name}}
+            </button>
+        </div>
+    </div>
+    
+</div>
+        
        
-    </mat-tree-node>
-</mat-tree>
