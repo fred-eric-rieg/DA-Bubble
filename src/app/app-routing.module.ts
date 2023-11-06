@@ -7,8 +7,8 @@ import { MainpageComponent } from './components/dashboard/mainpage/mainpage.comp
 import { authGuard } from './auth.guard';
 import { PageNotFoundComponent } from './components/errors/page-not-found/page-not-found.component';
 import { ChannelboxComponent } from './components/dashboard/channelbox/channelbox.component';
-import { ThreadboxComponent } from './components/dashboard/threadbox/threadbox.component';
 import { ContactboxComponent } from './components/dashboard/contactbox/contactbox/contactbox.component';
+import { ThreadboxComponent } from './components/dashboard/threadbox/threadbox/threadbox.component';
 
 const routes: Routes = [
   { path: '', redirectTo:'/login', pathMatch: 'full' },
