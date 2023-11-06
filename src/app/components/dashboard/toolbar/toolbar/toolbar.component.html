@@ -4,7 +4,7 @@
     </button>
     <span>DA Bubble</span>
     <span class="example-spacer"></span>
-    <span class="greeting">Welcome, {{user?.email}}</span>
+    <span class="greeting">Welcome, {{ user | async }}</span>
     <button mat-raised-button aria-label="Send" (click)="logOut()">
         <mat-icon>exit_to_app</mat-icon> Logout
     </button>

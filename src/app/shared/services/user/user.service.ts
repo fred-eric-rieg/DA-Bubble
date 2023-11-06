@@ -1,4 +1,5 @@
 import { Injectable } from '@angular/core';
+import { getAuth } from '@angular/fire/auth';
 import { equalTo, getDatabase, limitToLast, onValue, orderByChild, query, ref } from '@angular/fire/database';
 
 @Injectable({
@@ -6,7 +7,7 @@ import { equalTo, getDatabase, limitToLast, onValue, orderByChild, query, ref } 
 })
 export class UserService {
 
-
+  loggedUser = '';
 
   constructor() { }
 

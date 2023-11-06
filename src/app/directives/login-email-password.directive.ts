@@ -2,6 +2,7 @@ import { Directive, ElementRef, HostListener, Input } from '@angular/core';
 import { AuthService } from '../shared/services/authentication/auth.service';
 import { getAuth } from '@angular/fire/auth';
 import { Router } from '@angular/router';
+import { UserService } from '../shared/services/user/user.service';
 
 @Directive({
   selector: '[appLoginEmailPassword]'
@@ -13,7 +14,9 @@ export class LoginEmailPasswordDirective {
   constructor(
     private el: ElementRef,
     private authService: AuthService,
-    private router: Router) {}
+    private router: Router,
+    private us: UserService
+    ) {}
 
 
   @HostListener('click')
@@ -22,6 +25,7 @@ export class LoginEmailPasswordDirective {
       let response = await this.authService.signInNormal(auth, this.credentials.email, this.credentials.password);
       if (response) {
         let token = await response.getIdToken();
+        this.us.loggedUser = response.uid;
         localStorage.setItem('user', JSON.stringify(response));
         this.router.navigate(['/dashboard']);
       }
