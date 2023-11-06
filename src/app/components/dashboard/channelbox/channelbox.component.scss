@@ -45,9 +45,15 @@ section {
 }
 
 .width-100 {
+    transition: all 125ms ease-in-out;
     box-sizing: border-box;
     width: 100%;
     margin-right: 5rem;
+}
+
+.margin {
+    transition: all 125ms ease-in-out;
+    margin-right: calc(5rem + 250px);
 }
 
 @media screen and (width < 600px) {
