@@ -30,6 +30,7 @@ interface Channel {
 export class ChannelService implements OnDestroy {
 
   currentChannel = new BehaviorSubject<Channel>({});
+  id = new BehaviorSubject<string>('');
 
   constructor(private db: DatabaseService) { }
 
@@ -49,6 +50,7 @@ export class ChannelService implements OnDestroy {
       for (const key in data) {
         if (data.hasOwnProperty(key)) {
           if (key === id) {
+            this.id.next(id);
             this.currentChannel.next(data[key]);
           }
         }

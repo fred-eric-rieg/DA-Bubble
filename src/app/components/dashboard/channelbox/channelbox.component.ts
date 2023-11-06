@@ -46,6 +46,7 @@ export class ChannelboxComponent implements OnInit {
   ngOnInit() {
     this.route.params.subscribe(params => {
       this.cs.loadChannel(params['id']);
+      this.ms.getMessages(params['id']);
     });
     channelSub = this.cs.currentChannel.subscribe((data: Channel) => {
       this.channel = data;

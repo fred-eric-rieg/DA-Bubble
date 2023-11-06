@@ -1,4 +1,6 @@
-import { Component, Input } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
+import { BehaviorSubject } from 'rxjs';
+import { UserService } from 'src/app/shared/services/user/user.service';
 
 interface Message {
   content?: string;
@@ -11,7 +13,7 @@ interface Message {
   templateUrl: './message.component.html',
   styleUrls: ['./message.component.scss']
 })
-export class MessageComponent {
+export class MessageComponent implements OnInit {
 
   @Input() message: Message = {
     content: 'They may take our data, but they\'ll never take our freedom!',
@@ -19,6 +21,24 @@ export class MessageComponent {
     timestamp: 0
   };
 
-  constructor() { }
+  user = new BehaviorSubject<any>('');
+
+  constructor(private us: UserService) {
+  }
+
+  async ngOnInit() {
+    if (this.message.sender != 'William Wallace') {
+      this.getUser(this.message.sender!);
+    }
+  }
+
+  getUser(userId: string) {
+    this.us.getUser(userId).then(userName => {
+      this.user.next(userName);
+    }).catch(error => {
+      console.error('Failed to get user data', error);
+      this.user.next('Unknown User'); // fallback in case of an error
+    });
+  }
 
 }
