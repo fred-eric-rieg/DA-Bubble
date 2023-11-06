@@ -2,6 +2,8 @@ import { Component, HostListener, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { Subscription } from 'rxjs';
 import { ChannelService } from 'src/app/shared/services/channel/channel.service';
+import { MessageService } from 'src/app/shared/services/message/message.service';
+import { ResizeService } from 'src/app/shared/services/resize/resize.service';
 import { ToggleService } from 'src/app/shared/services/sidenav/toggle.service';
 
 let channelSub: Subscription;
@@ -26,25 +28,22 @@ interface Message {
 })
 export class ChannelboxComponent implements OnInit {
 
-  channel!: Channel;
-
-  messages!: Message[];
-
-  screenWidth!: number;
-  
   @HostListener('window:resize', ['$event'])
   onResize(event: any) {
-    this.screenWidth = window.innerWidth;
+    this.rs.screenWidth = window.innerWidth;
   }
+
+  channel!: Channel;
 
   constructor(
     public ts: ToggleService,
     public cs: ChannelService,
+    public ms: MessageService,
+    public rs: ResizeService,
     private route: ActivatedRoute)
   {}
 
   ngOnInit() {
-    this.screenWidth = window.innerWidth;
     this.route.params.subscribe(params => {
       this.cs.loadChannel(params['id']);
     });

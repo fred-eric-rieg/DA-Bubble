@@ -1,8 +1,8 @@
 <mat-toolbar color="primary">
-    <button mat-icon-button class="example-icon" aria-label="Example icon-button with menu icon">
+    <button mat-icon-button class="example-icon" aria-label="Example icon-button with menu icon" (click)="ts.toggle()">
         <mat-icon>menu</mat-icon>
     </button>
-    <span>My App</span>
+    <span>DA Bubble</span>
     <span class="example-spacer"></span>
     <span class="greeting">Welcome, {{user?.email}}</span>
     <button mat-raised-button aria-label="Send" (click)="logOut()">

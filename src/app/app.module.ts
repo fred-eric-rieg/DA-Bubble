@@ -33,6 +33,7 @@ import { ContactboxComponent } from './components/dashboard/contactbox/contactbo
 
 import { MessageInputComponent } from './components/dashboard/messageinput/message-input/message-input.component';
 import { ThreadboxComponent } from './components/dashboard/threadbox/threadbox/threadbox.component';
+import { MessageComponent } from './components/dashboard/messages/message/message.component';
 
 
 @NgModule({
@@ -49,7 +50,8 @@ import { ThreadboxComponent } from './components/dashboard/threadbox/threadbox/t
     AddChannelDialogComponent,
     ThreadboxComponent,
     ContactboxComponent,
-    MessageInputComponent
+    MessageInputComponent,
+    MessageComponent
   ],
   imports: [
     BrowserModule,

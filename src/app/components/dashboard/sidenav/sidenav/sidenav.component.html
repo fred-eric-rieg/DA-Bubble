@@ -24,7 +24,7 @@
         
     </mat-drawer>
 
-    <div class="example-sidenav-content">
+    <div class="example-sidenav-content" *ngIf="rs.screenWidth > 600">
         <button type="button" mat-icon-button (click)="drawer.toggle(); ts.toggled = !ts.toggled">
             <mat-icon *ngIf="ts.toggled">chevron_left</mat-icon>
             <mat-icon *ngIf="!ts.toggled">chevron_right</mat-icon>

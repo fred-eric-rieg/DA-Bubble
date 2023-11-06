@@ -1,0 +1,42 @@
+.flex-row {
+    display: flex;
+    flex-direction: row;
+    gap: 0.5rem;
+}
+
+.flex-column {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 0.25rem;
+}
+
+.profile {
+    width: 32px;
+    height: 32px;
+    border-radius: 0.5rem;
+}
+
+.sender {
+    font-weight: bold;
+    color: #dbdbdb;
+}
+
+.time {
+    font-size: 0.8rem;
+    color: #999;
+}
+
+.message {
+    color: #dbdbdb;
+    width: fit-content;
+}
+
+.hovering {
+    cursor: pointer;
+    margin-bottom: 0.5rem;
+}
+
+.hovering:hover {
+    background-color: #404040;
+}

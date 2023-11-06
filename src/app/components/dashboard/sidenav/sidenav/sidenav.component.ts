@@ -5,6 +5,7 @@ import { DatabaseService } from 'src/app/shared/services/database/database.servi
 import { Router } from '@angular/router';
 import { ToggleService } from 'src/app/shared/services/sidenav/toggle.service';
 import { set } from '@angular/fire/database';
+import { ResizeService } from 'src/app/shared/services/resize/resize.service';
 
 @Component({
   selector: 'app-sidenav',
@@ -18,6 +19,7 @@ export class SidenavComponent implements AfterViewInit {
   constructor(
     public dialog: MatDialog,
     private ds: DatabaseService,
+    public rs: ResizeService,
     private router: Router,
     public ts: ToggleService) {}
 
@@ -27,6 +29,7 @@ export class SidenavComponent implements AfterViewInit {
     setTimeout(() => {
       this.drawer.toggle();
       this.ts.toggled = true;
+      this.ts.drawer = this.drawer;
     }, 1000);
   }
 

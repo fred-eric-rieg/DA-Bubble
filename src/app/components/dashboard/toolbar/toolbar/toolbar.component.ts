@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { Router } from '@angular/router';
 import { AuthService } from 'src/app/shared/services/authentication/auth.service';
+import { ToggleService } from 'src/app/shared/services/sidenav/toggle.service';
 
 @Component({
   selector: 'app-toolbar',
@@ -13,7 +14,8 @@ export class ToolbarComponent {
 
   constructor(
     public authService: AuthService,
-    private router: Router) { }
+    public ts: ToggleService
+  ) { }
 
   logOut() {
     this.authService.signOut();

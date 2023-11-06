@@ -2,9 +2,7 @@
     z-index: -1;
 }
 
-section {
-    overflow-x: hidden;
-}
+
 
 .header {
     position: fixed;
@@ -26,7 +24,9 @@ section {
 
 .content {
     position: fixed;
+    box-sizing: border-box;
     top: calc(64px + 3rem + 1rem);
+    width: 100%;
     bottom: 68px;
     overflow-y: scroll;
     padding-right: 1rem;
@@ -48,12 +48,21 @@ section {
     transition: all 125ms ease-in-out;
     box-sizing: border-box;
     width: 100%;
-    margin-right: 5rem;
+    margin-right: 6rem;
+}
+
+.block {
+    display: block;
 }
 
 .margin {
     transition: all 125ms ease-in-out;
-    margin-right: calc(5rem + 250px);
+    margin-right: calc(6rem + 250px);
+}
+
+.margin-message {
+    transition: all 125ms ease-in-out;
+    margin-right: calc(4rem + 250px);
 }
 
 @media screen and (width < 600px) {
@@ -61,6 +70,7 @@ section {
         top: 56px;
         padding-top: 0.5rem;
         padding-bottom: 0.5rem;
+        padding-left: 1rem;
 
         span {
             font-size: 1.0rem;
@@ -70,6 +80,7 @@ section {
     }
 
     .content {
-        top: calc(55px + 2rem + 0.5rem);
+        top: calc(55px + 2rem + 1rem);
+        padding-left: 1rem;
     }
 }
