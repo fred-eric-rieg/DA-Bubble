@@ -1,0 +1,23 @@
+<section class="mat-typography app-frame mat-app-background">
+    <div class="logo"><mat-icon>question_answer</mat-icon><span>DA Bubble</span></div>
+
+    <div class="register-box">
+        <h1>Reset Password</h1>
+
+        <mat-form-field>
+            <mat-label>Email</mat-label>
+            <input matInput type="email" [(ngModel)]="email" required="">
+        </mat-form-field>
+
+        <p class="text-center">We will send you an email with instructions to reset your password.</p>
+
+        <button mat-raised-button color="primary" aria-label="Send" [disabled]="!validate()" (click)="resetPassword()">
+            <mat-icon>send</mat-icon> Request Reset
+        </button>
+    </div>
+
+    <button mat-button class="margin-top" aria-label="Send" [routerLink]="['/login']">
+        <mat-icon>keyboard_return</mat-icon> Back to Login
+    </button>
+
+</section>

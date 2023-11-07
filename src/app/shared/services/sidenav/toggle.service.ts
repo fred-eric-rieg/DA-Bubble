@@ -11,8 +11,6 @@ export class ToggleService {
   constructor() { }
 
   toggle() {
-    console.log('ToggleService.toggle() called');
-    console.log('this.drawer: ', this.drawer);
     if (!this.drawer) {return}
     this.drawer.toggle();
     this.toggled = !this.toggled;

@@ -21,7 +21,7 @@ section {
     font-weight: bold;
 }
 
-.login-box {
+.register-box {
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -34,20 +34,10 @@ section {
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
 }
 
-.flex-column {
-    display: flex;
-    flex-direction: column;
-    gap: 1rem;
-}
-
 .margin-top {
     margin-top: 1rem;
 }
 
-.flex-row {
-    display: flex;
-    flex-direction: row;
-    align-items: center;
-    justify-content: center;
-    gap: 1rem;
+.text-center {
+    text-align: center;
 }

@@ -34,6 +34,8 @@ import { ContactboxComponent } from './components/dashboard/contactbox/contactbo
 import { MessageInputComponent } from './components/dashboard/messageinput/message-input/message-input.component';
 import { ThreadboxComponent } from './components/dashboard/threadbox/threadbox/threadbox.component';
 import { MessageComponent } from './components/dashboard/messages/message/message.component';
+import { RegisterComponent } from './components/login/register/register/register.component';
+import { ResetComponent } from './components/login/reset/reset/reset.component';
 
 
 @NgModule({
@@ -51,7 +53,9 @@ import { MessageComponent } from './components/dashboard/messages/message/messag
     ThreadboxComponent,
     ContactboxComponent,
     MessageInputComponent,
-    MessageComponent
+    MessageComponent,
+    RegisterComponent,
+    ResetComponent
   ],
   imports: [
     BrowserModule,

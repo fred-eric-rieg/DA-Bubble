@@ -12,21 +12,16 @@ export class LoginEmailPasswordDirective {
   @Input('appLoginEmailPassword') credentials = { email: '', password: '' };
 
   constructor(
-    private el: ElementRef,
     private authService: AuthService,
     private router: Router,
-    private us: UserService
     ) {}
 
 
   @HostListener('click')
     async onClick() {
       const auth = getAuth();
-      let response = await this.authService.signInNormal(auth, this.credentials.email, this.credentials.password);
-      if (response) {
-        let token = await response.getIdToken();
-        this.us.loggedUser = response.uid;
-        localStorage.setItem('user', JSON.stringify(response));
+      let response = await this.authService.logInNormal(auth, this.credentials.email, this.credentials.password);
+      if (response === 'success') {
         this.router.navigate(['/dashboard']);
       }
   }

@@ -9,10 +9,14 @@ import { PageNotFoundComponent } from './components/errors/page-not-found/page-n
 import { ChannelboxComponent } from './components/dashboard/channelbox/channelbox.component';
 import { ContactboxComponent } from './components/dashboard/contactbox/contactbox/contactbox.component';
 import { ThreadboxComponent } from './components/dashboard/threadbox/threadbox/threadbox.component';
+import { ResetComponent } from './components/login/reset/reset/reset.component';
+import { RegisterComponent } from './components/login/register/register/register.component';
 
 const routes: Routes = [
   { path: '', redirectTo:'/login', pathMatch: 'full' },
   { path: 'login', component: LoginComponent },
+  { path: 'reset', component: ResetComponent },
+  { path: 'register', component: RegisterComponent },
   { path: 'dashboard', component: MainpageComponent, 
     children: [
     { path: 'channel/:id', component: ChannelboxComponent, canActivate: [authGuard] },
