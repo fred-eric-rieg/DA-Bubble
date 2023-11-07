@@ -20,7 +20,7 @@ export class SidenavComponent implements AfterViewInit {
     private ds: DatabaseService,
     public rs: ResizeService,
     private router: Router,
-    public ts: ToggleService) {}
+    public ts: ToggleService) { }
 
 
   ngAfterViewInit() {
@@ -54,7 +54,7 @@ export class SidenavComponent implements AfterViewInit {
     });
 
     dialogRef.afterClosed().subscribe(result => {
-      if (!result) {return} // If the user clicks cancel, do nothing.
+      if (!result) { return } // If the user clicks cancel, do nothing.
       let id = "channel-" + Math.random().toString(36).substring(2, 15);
       this.ds.writeChannelData(id, result.name, result.description, result.members, result.timestamp);
     });
