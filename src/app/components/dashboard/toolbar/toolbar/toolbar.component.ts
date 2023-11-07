@@ -34,12 +34,12 @@ export class ToolbarComponent implements OnInit {
    * @param userId as string
    */
   getUser(userId: string) {
-    this.us.getUser(userId).then(userName => {
-      if (userName == ' ') {
+    this.us.getUser(userId).then(user => {
+      if (user.name == ' ') {
         this.user.next('Misterious X');
         return;
       }
-      this.user.next(userName);
+      this.user.next(user.name + ' ' + user.surname);
     }).catch(error => {
       console.error('Failed to get user data', error);
       this.user.next('Misterious X'); // fallback in case of an error

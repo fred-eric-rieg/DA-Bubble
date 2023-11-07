@@ -38,6 +38,7 @@ import { RegisterComponent } from './components/login/register/register/register
 import { ResetComponent } from './components/login/reset/reset/reset.component';
 import { AccountComponent } from './components/dashboard/accountbox/account/account.component';
 import { EditAccountComponent } from './components/dialogs/edit-account/edit-account.component';
+import { GuestDirective } from './directives/guest.directive';
 
 
 @NgModule({
@@ -59,7 +60,8 @@ import { EditAccountComponent } from './components/dialogs/edit-account/edit-acc
     RegisterComponent,
     ResetComponent,
     AccountComponent,
-    EditAccountComponent
+    EditAccountComponent,
+    GuestDirective
   ],
   imports: [
     BrowserModule,

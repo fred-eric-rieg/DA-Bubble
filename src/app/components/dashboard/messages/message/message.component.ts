@@ -8,6 +8,20 @@ interface Message {
   timestamp?: number;
 }
 
+interface channel {
+  id: string;
+}
+
+interface Account {
+  id: string;
+  name: string;
+  surname: string;
+  email: string;
+  channels: channel[];
+  timestamp: number;
+  profile: string;
+}
+
 @Component({
   selector: 'app-message',
   templateUrl: './message.component.html',
@@ -21,7 +35,15 @@ export class MessageComponent implements OnInit {
     timestamp: 0
   };
 
-  user = new BehaviorSubject<any>('');
+  user = new BehaviorSubject<Account>({
+    id: '',
+    name: '',
+    surname: '',
+    email: '',
+    channels: [],
+    timestamp: 0,
+    profile: ''
+  });
 
   constructor(private us: UserService) {
   }
@@ -33,11 +55,10 @@ export class MessageComponent implements OnInit {
   }
 
   getUser(userId: string) {
-    this.us.getUser(userId).then(userName => {
-      this.user.next(userName);
+    this.us.getUser(userId).then(user => {
+      this.user.next(user);
     }).catch(error => {
       console.error('Failed to get user data', error);
-      this.user.next('Unknown User'); // fallback in case of an error
     });
   }
 

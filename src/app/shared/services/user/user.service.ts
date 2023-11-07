@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
-import { getAuth } from '@angular/fire/auth';
-import { equalTo, getDatabase, limitToLast, onValue, orderByChild, query, ref, set } from '@angular/fire/database';
+import { getAuth, sendEmailVerification, updateEmail } from '@angular/fire/auth';
+import { equalTo, getDatabase, limitToLast, onValue, orderByChild, query, ref, set, update } from '@angular/fire/database';
 import { BehaviorSubject } from 'rxjs';
 
 interface channel {
@@ -46,7 +46,6 @@ export class UserService {
 
   async getAccount() {
     const auth = getAuth();
-    console.log(auth.currentUser?.uid);
     const db = getDatabase();
     const userRef = ref(db, 'users/');
     const userQuery = query(userRef, orderByChild('id'), equalTo(auth.currentUser?.uid || JSON.parse(localStorage.getItem('user') || '{}').uid));
@@ -69,38 +68,67 @@ export class UserService {
    * @returns name and surname of user as one string
    */
   async getUser(userId: string) {
-  const db = getDatabase();
-  const userRef = ref(db, 'users/');
-  const userQuery = query(userRef, orderByChild('id'), equalTo(userId));
+    const db = getDatabase();
+    const userRef = ref(db, 'users/');
+    const userQuery = query(userRef, orderByChild('id'), equalTo(userId));
 
-  return new Promise<String>((resolve, reject) => {
-    onValue(userQuery, (snapshot) => {
-      if (snapshot.exists()) {
-        const data = snapshot.val();
-        const key = Object.keys(data)[0];
-        resolve(data[key].name + ' ' + data[key].surname);
-      } else {
-        reject('User not found');
-      }
-    }, {
-      onlyOnce: true
+    return new Promise<Account>((resolve, reject) => {
+      onValue(userQuery, (snapshot) => {
+        if (snapshot.exists()) {
+          const data = snapshot.val();
+          const key = Object.keys(data)[0];
+          resolve(data[key]);
+        } else {
+          reject('User not found');
+        }
+      });
     });
-  });
-}
+  }
 
 
   async createUser(user: User) {
-  const db = getDatabase();
-  const userRef = ref(db, 'users/' + user.id);
+    const db = getDatabase();
+    const userRef = ref(db, 'users/' + user.id);
 
-  await set(userRef, {
-    id: user.id,
-    name: '',
-    surname: '',
-    email: user.email,
-    channels: [],
-    timestamp: user.timestamp,
-    profile: 'gs://db-bubble.appspot.com/giant-tree-frog-942682_640.jpg' // default profile picture
-  });
-}
+    // funny random names
+    let funnyRandomName = ['Misterious', 'Funny', 'Crazy', 'Silly', 'Clever', 'Smart', 'Dumb', 'Stupid', 'Crazy', 'Lazy', 'Sleepy', 'Hungry', 'Angry', 'Happy', 'Sad', 'Silly', 'Clever', 'Smart', 'Dumb', 'Stupid', 'Crazy', 'Lazy', 'Sleepy', 'Hungry', 'Angry', 'Happy', 'Sad', 'Silly', 'Clever', 'Smart', 'Dumb', 'Stupid', 'Crazy', 'Lazy', 'Sleepy', 'Hungry', 'Angry', 'Happy', 'Sad', 'Silly', 'Clever', 'Smart', 'Dumb', 'Stupid', 'Crazy', 'Lazy', 'Sleepy', 'Hungry', 'Angry', 'Happy', 'Sad', 'Silly', 'Clever', 'Smart', 'Dumb', 'Stupid', 'Crazy', 'Lazy', 'Sleepy', 'Hungry', 'Angry', 'Happy', 'Sad', 'Silly', 'Clever', 'Smart', 'Dumb', 'Stupid', 'Crazy', 'Lazy', 'Sleepy', 'Hungry', 'Angry', 'Happy', 'Sad'];
+    let funnyRandomSurname = ['X', 'Y', 'Z', 'A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'X', 'Y', 'Z', 'A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'X', 'Y', 'Z', 'A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'X', 'Y', 'Z', 'A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'X', 'Y', 'Z', 'A', 'B', 'C', 'D', 'E', 'F', 'G', 'H'];
+
+    await set(userRef, {
+      id: user.id,
+      name: funnyRandomName[Math.floor(Math.random() * funnyRandomName.length)],
+      surname: funnyRandomSurname[Math.floor(Math.random() * funnyRandomSurname.length)],
+      email: user.email,
+      channels: [],
+      timestamp: user.timestamp,
+      profile: 'https://firebasestorage.googleapis.com/v0/b/db-bubble.appspot.com/o/giant-tree-frog-942682_640.jpg?alt=media&token=c3489da1-2462-4486-8e01-b370996c35f5' // default profile picture
+    });
+  }
+
+
+  async updateAccount(account: Account) {
+    const db = getDatabase();
+    const userRef = ref(db, 'users/' + account.id);
+
+    await update(userRef, {
+      name: account.name,
+      surname: account.surname,
+    }).then(() => {
+      this.writeMessage('Account updated!');
+    }).catch((error) => {
+      this.writeMessage(error.message);
+    });
+  }
+
+
+  // This method is used to display a message on the bottom of the screen
+  writeMessage(text: string) {
+    let message = document.body.appendChild(document.createElement('div'));
+    message.textContent = text;
+    message.setAttribute('style', 'position: fixed; bottom: 10%; left: calc(50% - 116px); background-color: #000; color: #fff; padding: 1rem; width: 200px; border-radius: 10px; text-align: center; z-index: 999;');
+    setTimeout(() => {
+      message.remove();
+    }, 3000);
+  }
+
 }

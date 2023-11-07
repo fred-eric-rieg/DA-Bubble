@@ -1,8 +1,9 @@
 <div class="flex-row hovering">
-    <img class="profile" src="../../../../../assets/icons/icon-72x72.png" alt="sender profile picture">
+    <img class="profile" *ngIf="message.sender != 'William Wallace'" src="{{ (user | async)?.profile }}" alt="sender profile picture">
+    <img class="profile" *ngIf="message.sender == 'William Wallace' " src="../../../../../assets/icons/icon-72x72.png" alt="default profile picture">
     <div class="flex-column">
         <div class="flex-row">
-            <span class="sender" *ngIf="message.sender != 'William Wallace'">{{ user | async }}</span>
+            <span class="sender" *ngIf="message.sender != 'William Wallace'">{{ (user | async)?.name + ' ' + (user | async)?.surname }}</span>
             <span class="sender" *ngIf="message.sender == 'William Wallace' ">{{ message.sender }}</span>
             <span class="time">{{ message.timestamp | date: 'shortTime' }}</span>
         </div>

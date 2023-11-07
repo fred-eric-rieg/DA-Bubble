@@ -1,5 +1,5 @@
 import { Injectable, inject } from '@angular/core';
-import { Auth, browserSessionPersistence, createUserWithEmailAndPassword, setPersistence } from '@angular/fire/auth';
+import { Auth, browserSessionPersistence, createUserWithEmailAndPassword, setPersistence, signInAnonymously } from '@angular/fire/auth';
 import { getAuth, signInWithEmailAndPassword } from "firebase/auth";
 import { Router } from '@angular/router';
 import { UserService } from '../user/user.service';
@@ -19,7 +19,6 @@ export class AuthService {
     return createUserWithEmailAndPassword(auth, email, password)
       .then((userCredential) => {
         const user = userCredential.user;
-        console.log(user);
         this.us.createUser({ id: user.uid, email: user.email || '', timestamp: Date.now() });
         this.writeMessage('Account created!');
         return 'success';
@@ -30,6 +29,24 @@ export class AuthService {
         this.writeMessage(errorMessage);
         return 'error';
       });
+  }
+
+
+  async loginAnonymous() {
+    const auth = getAuth();
+    return signInAnonymously(auth)
+    .then((userCredential) => {
+      const user = userCredential.user;
+      this.us.createUser({ id: user.uid, email: 'guest@user.de', timestamp: Date.now() });
+      this.writeMessage('Logged in!');
+      return 'success';
+    })
+    .catch((error) => {
+      const errorCode = error.code;
+      const errorMessage = error.message;
+      this.writeMessage(errorMessage);
+      return 'error';
+    });
   }
 
 
@@ -49,7 +66,7 @@ export class AuthService {
         const user = userCredential.user;
         localStorage.setItem('user', JSON.stringify(user));
         this.us.loggedUser = user.uid;
-        this.writeMessage('Signed in!');
+        this.writeMessage('Logged in!');
         return 'success';
       })
       .catch((error) => {
