@@ -28,7 +28,7 @@ import { ToolbarComponent } from './components/dashboard/toolbar/toolbar/toolbar
 import { SidenavComponent } from './components/dashboard/sidenav/sidenav/sidenav.component';
 import { ChannelComponent } from './components/dashboard/sidenav/channels/channel.component';
 import { ChannelboxComponent } from './components/dashboard/channelbox/channelbox.component';
-import { AddChannelDialogComponent } from './components/dialogs/addchannel/add-channel-dialog/add-channel-dialog.component';
+import { AddChannelDialogComponent } from './components/dialogs/add-channel-dialog/add-channel-dialog.component';
 import { ContactboxComponent } from './components/dashboard/contactbox/contactbox/contactbox.component';
 
 import { MessageInputComponent } from './components/dashboard/messageinput/message-input/message-input.component';
@@ -37,6 +37,7 @@ import { MessageComponent } from './components/dashboard/messages/message/messag
 import { RegisterComponent } from './components/login/register/register/register.component';
 import { ResetComponent } from './components/login/reset/reset/reset.component';
 import { AccountComponent } from './components/dashboard/accountbox/account/account.component';
+import { EditAccountComponent } from './components/dialogs/edit-account/edit-account.component';
 
 
 @NgModule({
@@ -57,7 +58,8 @@ import { AccountComponent } from './components/dashboard/accountbox/account/acco
     MessageComponent,
     RegisterComponent,
     ResetComponent,
-    AccountComponent
+    AccountComponent,
+    EditAccountComponent
   ],
   imports: [
     BrowserModule,

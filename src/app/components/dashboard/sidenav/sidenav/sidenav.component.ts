@@ -1,10 +1,9 @@
 import { AfterViewInit, Component, ViewChild } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
-import { AddChannelDialogComponent } from '../../../dialogs/addchannel/add-channel-dialog/add-channel-dialog.component';
+import { AddChannelDialogComponent } from '../../../dialogs/add-channel-dialog/add-channel-dialog.component';
 import { DatabaseService } from 'src/app/shared/services/database/database.service';
 import { Router } from '@angular/router';
 import { ToggleService } from 'src/app/shared/services/sidenav/toggle.service';
-import { set } from '@angular/fire/database';
 import { ResizeService } from 'src/app/shared/services/resize/resize.service';
 
 @Component({
