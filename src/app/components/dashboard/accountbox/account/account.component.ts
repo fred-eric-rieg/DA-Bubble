@@ -1,5 +1,7 @@
 import { Component, OnDestroy } from '@angular/core';
+import { MatDialog } from '@angular/material/dialog';
 import { Subscription } from 'rxjs';
+import { EditAccountComponent } from 'src/app/components/dialogs/edit-account/edit-account.component';
 import { UserService } from 'src/app/shared/services/user/user.service';
 
 interface Account {
@@ -22,7 +24,7 @@ interface channel {
   styleUrls: ['./account.component.scss']
 })
 export class AccountComponent implements OnDestroy {
-  
+
   accSub: Subscription = new Subscription();
 
   account: Account = {
@@ -33,25 +35,35 @@ export class AccountComponent implements OnDestroy {
     channels: [],
     timestamp: 0,
     profile: ''
-  }; 
+  };
 
 
-  constructor(public us: UserService) {
+  constructor(
+    public us: UserService,
+    public dialog: MatDialog
+  ) {
     this.us.getAccount();
     this.accSub = this.us.account.subscribe((account) => {
       this.account = account;
-      console.log(this.account);
     });
   }
 
 
   ngOnDestroy(): void {
-      this.accSub.unsubscribe();
+    this.accSub.unsubscribe();
   }
 
 
-  editAccount() {
+  openEditAccountDialog(): void {
+    const dialogRef = this.dialog.open(EditAccountComponent, {
+      width: '300px',
+      data: this.account
+    });
 
+    dialogRef.afterClosed().subscribe(result => {
+      if (!result) { return } // If the user clicks cancel, do nothing.
+      this.us.updateAccount(result);
+    });
   }
-  
+
 }

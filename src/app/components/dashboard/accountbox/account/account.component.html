@@ -3,31 +3,41 @@
 
     <div class="flex-row">
         <img class="profile" [src]="account.profile" alt="profile picture">
-        <p *ngIf="account.profile == 'https://firebasestorage.googleapis.com/v0/b/db-bubble.appspot.com/o/giant-tree-frog-942682_640.jpg?alt=media&token=c3489da1-2462-4486-8e01-b370996c35f5'">
-            Image by <a href="https://pixabay.com/users/pixel-mixer-1197643/?utm_source=link-attribution&utm_medium=referral&utm_campaign=image&utm_content=942682" target="_blank">Marcel Langthim</a>
-             from <a href="https://pixabay.com//?utm_source=link-attribution&utm_medium=referral&utm_campaign=image&utm_content=942682" target="_blank">Pixabay</a>
-            </p>
+        <p
+            *ngIf="account.profile == 'https://firebasestorage.googleapis.com/v0/b/db-bubble.appspot.com/o/giant-tree-frog-942682_640.jpg?alt=media&token=c3489da1-2462-4486-8e01-b370996c35f5'">
+            Image by <a
+                href="https://pixabay.com/users/pixel-mixer-1197643/?utm_source=link-attribution&utm_medium=referral&utm_campaign=image&utm_content=942682"
+                target="_blank">Marcel Langthim</a>
+            from <a
+                href="https://pixabay.com//?utm_source=link-attribution&utm_medium=referral&utm_campaign=image&utm_content=942682"
+                target="_blank">Pixabay</a>
+        </p>
     </div>
 
     <div class="flex-row">
-        <p>Name:</p><p *ngIf="account.name">{{ account.name }}</p><p *ngIf="!account.name">Misterious</p>
+        <p>Name:</p>
+        <p *ngIf="account.name">{{ account.name }}</p>
+        <p *ngIf="!account.name">Misterious</p>
     </div>
 
     <div class="flex-row">
-        <p>Surname:</p><p *ngIf="account.name">{{ account.surname }}</p><p *ngIf="!account.surname">X</p>
+        <p>Surname:</p>
+        <p *ngIf="account.name">{{ account.surname }}</p>
+        <p *ngIf="!account.surname">X</p>
     </div>
 
     <div class="flex-row">
-        <p>Email:</p><p>{{ account.email }}</p>
+        <p>Email:</p>
+        <p>{{ account.email }}</p>
     </div>
 
     <div class="flex-row">
-        <p>Created:</p><p>{{ account.timestamp | date: 'long' }}</p>
+        <p>Created:</p>
+        <p>{{ account.timestamp | date: 'long' }}</p>
     </div>
-    
-        <button mat-raised-button (click)="editAccount()">
-            <mat-icon>edit</mat-icon> Edit
-        </button>
+
+    <button mat-raised-button (click)="openEditAccountDialog()">
+        <mat-icon>edit</mat-icon> Edit
+    </button>
 
 </section>
-

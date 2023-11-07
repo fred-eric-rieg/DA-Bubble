@@ -1,1 +1,18 @@
-<p>edit-account works!</p>
+<h1 mat-dialog-title>Edit your account</h1>
+<div mat-dialog-content>
+
+    <mat-form-field>
+        <mat-label>Name</mat-label>
+        <input matInput [(ngModel)]="data.name" maxlength="15">
+    </mat-form-field>
+
+    <mat-form-field>
+        <mat-label>Surname</mat-label>
+        <input matInput [(ngModel)]="data.surname" maxlength="15">
+    </mat-form-field>
+
+</div>
+<div mat-dialog-actions>
+  <button mat-button mat-dialog-close>Cancel</button>
+  <button mat-button mat-dialog-close cdkFocusInitial [mat-dialog-close]="data" [disabled]="data.name.length == 0 || data.surname.length == 0">Update</button>
+</div>
