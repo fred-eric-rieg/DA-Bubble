@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { getAuth } from '@angular/fire/auth';
-import { equalTo, getDatabase, limitToLast, onValue, orderByChild, push, query, ref } from '@angular/fire/database';
+import { equalTo, getDatabase, limitToLast, onValue, orderByChild, query, ref, set } from '@angular/fire/database';
 
 interface channel {
   id: string;
@@ -8,12 +8,8 @@ interface channel {
 
 interface User {
   id: string;
-  name?: string;
-  surname?: string;
   email: string;
-  channels?: channel[];
-  timestamp?: number;
-  profile?: string;
+  timestamp: number;
 }
 
 @Injectable({
@@ -49,9 +45,9 @@ export class UserService {
 
   async createUser(user: User) {
     const db = getDatabase();
-    const userRef = ref(db, 'users/');
+    const userRef = ref(db, 'users/' + user.id);
 
-    await push(userRef, {
+    await set(userRef, {
       id: user.id,
       name: '',
       surname: '',

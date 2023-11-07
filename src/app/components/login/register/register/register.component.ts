@@ -1,4 +1,6 @@
 import { Component } from '@angular/core';
+import { Router } from '@angular/router';
+import { AuthService } from 'src/app/shared/services/authentication/auth.service';
 
 @Component({
   selector: 'app-register',
@@ -13,7 +15,7 @@ export class RegisterComponent {
     password2: ''
   };
 
-  constructor() { }
+  constructor(private authService: AuthService, private router: Router) { }
 
 
   validate(): boolean {
@@ -25,9 +27,12 @@ export class RegisterComponent {
   }
 
 
-  registerAccount() {
+  async registerAccount() {
     if (this.validate()) {
-      // this.authService.register(this.credentials.email, this.credentials.password);
+      let response = await this.authService.signUp(this.credentials.email, this.credentials.password);
+      if (response === 'success') {
+        this.router.navigate(['/login']);
+      }
     }
   }
 }

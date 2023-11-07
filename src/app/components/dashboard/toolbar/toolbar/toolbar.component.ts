@@ -21,6 +21,7 @@ export class ToolbarComponent implements OnInit {
 
   ngOnInit(): void {
     let user = JSON.parse(localStorage.getItem('user') || '{}');
+    console.log(user.uid);
     this.getUser(user.uid);
   }
 
@@ -31,6 +32,10 @@ export class ToolbarComponent implements OnInit {
 
   getUser(userId: string) {
     this.us.getUser(userId).then(userName => {
+      if (userName = typeof 'undefined') {
+        this.user.next('Misterious X');
+        return;
+      }
       this.user.next(userName);
     }).catch(error => {
       console.error('Failed to get user data', error);

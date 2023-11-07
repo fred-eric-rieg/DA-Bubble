@@ -1,5 +1,5 @@
 import { Injectable, inject } from '@angular/core';
-import { Auth, browserSessionPersistence, setPersistence } from '@angular/fire/auth';
+import { Auth, browserSessionPersistence, createUserWithEmailAndPassword, setPersistence } from '@angular/fire/auth';
 import { getAuth, signInWithEmailAndPassword } from "firebase/auth";
 import { Router } from '@angular/router';
 import { UserService } from '../user/user.service';
@@ -13,18 +13,34 @@ export class AuthService {
 
   constructor(private router: Router, private us: UserService) { }
 
-  async logInNormal(auth: Auth, email: string, password: string) {
+
+  async signUp(email: string, password: string) {
+    const auth = getAuth();
+    return createUserWithEmailAndPassword(auth, email, password)
+      .then((userCredential) => {
+        const user = userCredential.user;
+        console.log(user);
+        this.us.createUser({id: user.uid, email: user.email || '', timestamp: Date.now()});
+        this.writeMessage('Account created!');
+        return 'success';
+      })
+      .catch((error) => {
+        const errorCode = error.code;
+        const errorMessage = error.message;
+        this.writeMessage(error.message);
+        return 'error';
+      });
+  }
+  
+
+  async logInNormal(email: string, password: string) {
+    const auth = getAuth();
     setPersistence(auth, browserSessionPersistence)
       .then(() => {
-        // Existing and future Auth states are now persisted in the current
-        // session only. Closing the window would clear any existing state even
-        // if a user forgets to sign out.
-        // ...
-        // New sign-in will be persisted with session persistence.
+        // Closing browser will clear any state
         return signInWithEmailAndPassword(auth, email, password);
       })
       .catch((error) => {
-        // Handle Errors here.
         const errorCode = error.code;
         const errorMessage = error.message;
       });
@@ -54,6 +70,12 @@ export class AuthService {
   }
 
 
+  isLoggedIn() {
+    const auth = getAuth();
+    return auth.currentUser;
+  }
+
+
   writeMessage(text: string) {
     let message = document.body.appendChild(document.createElement('div'));
     message.textContent = text;
@@ -62,12 +84,4 @@ export class AuthService {
       message.remove();
     }, 3000);
   }
-
-
-  isLoggedIn() {
-    const auth = getAuth();
-    return auth.currentUser;
-  }
-
-
 }
