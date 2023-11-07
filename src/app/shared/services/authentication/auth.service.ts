@@ -20,18 +20,18 @@ export class AuthService {
       .then((userCredential) => {
         const user = userCredential.user;
         console.log(user);
-        this.us.createUser({id: user.uid, email: user.email || '', timestamp: Date.now()});
+        this.us.createUser({ id: user.uid, email: user.email || '', timestamp: Date.now() });
         this.writeMessage('Account created!');
         return 'success';
       })
       .catch((error) => {
         const errorCode = error.code;
         const errorMessage = error.message;
-        this.writeMessage(error.message);
+        this.writeMessage(errorMessage);
         return 'error';
       });
   }
-  
+
 
   async logInNormal(email: string, password: string) {
     const auth = getAuth();
@@ -55,7 +55,7 @@ export class AuthService {
       .catch((error) => {
         const errorCode = error.code;
         const errorMessage = error.message;
-        this.writeMessage('Login failed!');
+        this.writeMessage(errorMessage);
         return 'error';
       });
   }
@@ -63,10 +63,13 @@ export class AuthService {
 
   async signOut() {
     const auth = getAuth();
-    await auth.signOut();
-    localStorage.removeItem('user');
-    this.writeMessage('Signed out!');
-    this.router.navigate(['/login']);
+    await auth.signOut().then(() => {
+      localStorage.removeItem('user');
+      this.writeMessage('Signed out!');
+      this.router.navigate(['/login']);
+    }).catch((error) => {
+      this.writeMessage(error.message);
+    });
   }
 
 
@@ -75,7 +78,7 @@ export class AuthService {
     return auth.currentUser;
   }
 
-
+  // This method is used to display a message on the bottom of the screen
   writeMessage(text: string) {
     let message = document.body.appendChild(document.createElement('div'));
     message.textContent = text;

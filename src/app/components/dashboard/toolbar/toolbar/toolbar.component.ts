@@ -21,7 +21,6 @@ export class ToolbarComponent implements OnInit {
 
   ngOnInit(): void {
     let user = JSON.parse(localStorage.getItem('user') || '{}');
-    console.log(user.uid);
     this.getUser(user.uid);
   }
 
@@ -29,10 +28,14 @@ export class ToolbarComponent implements OnInit {
     this.authService.signOut();
   }
 
-
+  /**
+   * Get user name from database via the uid from registration.
+   * At start, the user name is empty, so the user is called 'Misterious X'.
+   * @param userId as string
+   */
   getUser(userId: string) {
     this.us.getUser(userId).then(userName => {
-      if (userName = typeof 'undefined') {
+      if (userName == ' ') {
         this.user.next('Misterious X');
         return;
       }

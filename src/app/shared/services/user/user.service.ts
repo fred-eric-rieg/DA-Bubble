@@ -22,6 +22,11 @@ export class UserService {
   constructor() { }
 
 
+  /**
+   * Dedicated function for getting the user name & surname from the database.
+   * @param userId as string
+   * @returns name and surname of user as one string
+   */
   async getUser(userId: string) {
     const db = getDatabase();
     const userRef = ref(db, 'users/');
