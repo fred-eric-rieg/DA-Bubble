@@ -11,6 +11,7 @@ import { ContactboxComponent } from './components/dashboard/contactbox/contactbo
 import { ThreadboxComponent } from './components/dashboard/threadbox/threadbox/threadbox.component';
 import { ResetComponent } from './components/login/reset/reset/reset.component';
 import { RegisterComponent } from './components/login/register/register/register.component';
+import { AccountComponent } from './components/dashboard/accountbox/account/account.component';
 
 const routes: Routes = [
   { path: '', redirectTo:'/login', pathMatch: 'full' },
@@ -22,7 +23,9 @@ const routes: Routes = [
     { path: 'channel/:id', component: ChannelboxComponent, canActivate: [authGuard] },
     { path: 'directmessage/:id', component: ChannelboxComponent, canActivate: [authGuard] },
     { path: 'threads', component: ThreadboxComponent, canActivate: [authGuard] },
-    { path: 'contacts', component: ContactboxComponent, canActivate: [authGuard] }
+    { path: 'contacts', component: ContactboxComponent, canActivate: [authGuard] },
+    { path: 'account', component: AccountComponent, canActivate: [authGuard] },
+    { path: '', component: AccountComponent, canActivate: [authGuard] }
   ], canActivate: [authGuard] },
   { path: '**', component: PageNotFoundComponent }
 ];

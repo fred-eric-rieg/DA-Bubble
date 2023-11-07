@@ -44,6 +44,11 @@ export class SidenavComponent implements AfterViewInit {
   }
 
 
+  openAccount() {
+    this.router.navigate(['/dashboard/account']);
+  }
+
+
   openDialogChannel(): void {
     const dialogRef = this.dialog.open(AddChannelDialogComponent, {
       width: '300px'

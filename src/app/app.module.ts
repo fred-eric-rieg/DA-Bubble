@@ -36,6 +36,7 @@ import { ThreadboxComponent } from './components/dashboard/threadbox/threadbox/t
 import { MessageComponent } from './components/dashboard/messages/message/message.component';
 import { RegisterComponent } from './components/login/register/register/register.component';
 import { ResetComponent } from './components/login/reset/reset/reset.component';
+import { AccountComponent } from './components/dashboard/accountbox/account/account.component';
 
 
 @NgModule({
@@ -55,7 +56,8 @@ import { ResetComponent } from './components/login/reset/reset/reset.component';
     MessageInputComponent,
     MessageComponent,
     RegisterComponent,
-    ResetComponent
+    ResetComponent,
+    AccountComponent
   ],
   imports: [
     BrowserModule,
