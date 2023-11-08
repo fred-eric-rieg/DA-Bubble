@@ -21,8 +21,6 @@ export class DmarrayPipe implements PipeTransform {
   transform(directmessage: FilteredDM | null): Array<FlatFilteredDM> | [] {
     if (!directmessage) return [];
 
-    console.log(directmessage);
-
     return Object.entries(directmessage).map(([key, value]) => ({
       key, // the direct message key
       ...value // the members and timestamp

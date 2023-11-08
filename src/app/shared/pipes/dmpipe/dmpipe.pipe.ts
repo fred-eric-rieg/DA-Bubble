@@ -28,13 +28,14 @@ export class DmpipePipe implements PipeTransform {
 
     const filteredMessages: FilteredDM = {};
     Object.entries(directMessages).forEach(([key, value]) => {
-      Object.entries(value.members).forEach(([memberId, memberValue]) => {
-        if (memberId != excludedMemberId && memberValue) {
-          filteredMessages[key] = { members: memberId, timestamp: value.timestamp};
-        }
-      });
+      if (value.members[excludedMemberId]) { // Current user must be a member of the direct message
+        Object.entries(value.members).forEach(([memberId, memberValue]) => {
+          if (memberId != excludedMemberId && memberValue) {
+            filteredMessages[key] = { members: memberId, timestamp: value.timestamp};
+          }
+        });
+      }
     });
-    console.log(filteredMessages);
     return filteredMessages;
   }
 
