@@ -9,7 +9,7 @@
 
     <div *ngIf="chanExpanded">
         <div *ngFor="let chan of channel" class="flex-row">
-            <button mat-button disabled="" class="buffer"></button>
+            <div class="buffer"></div>
             <button mat-button class="text-align-left" (click)="openChannel(chan.id)">
                 {{chan.name}}
             </button>
@@ -25,10 +25,11 @@
     </button>
 
     <div *ngIf="dmExpanded">
-        <div *ngFor="let dm of directmessages" class="flex-row">
-            <button mat-button disabled="" class="buffer"></button>
-            <button mat-button class="text-align-left" (click)="openDirectMessage(dm.id)">
-                {{dm.name}}
+        <div *ngFor="let dm of (ds.directmessageSubject| async | dmpipe | dmarray | dmname)" class="flex-row">
+            <div class="buffer"></div>
+            
+            <button mat-button class="text-align-left" (click)="openDirectMessage(dm.key)">
+                <div class="flex"><img class="profile" [src]="dm.profile" alt="contact profile picture"> {{ dm.name }}</div>
             </button>
         </div>
     </div>

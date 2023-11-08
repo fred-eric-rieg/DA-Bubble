@@ -41,6 +41,9 @@ import { EditAccountComponent } from './components/dialogs/edit-account/edit-acc
 import { GuestDirective } from './directives/guest.directive';
 import { ContactComponent } from './components/dashboard/contactbox/contact/contact.component';
 import { DirectMessageComponent } from './components/dashboard/directmessagebox/direct-message/direct-message.component';
+import { DmpipePipe } from './shared/pipes/dmpipe/dmpipe.pipe';
+import { DmarrayPipe } from './shared/pipes/dmarray/dmarray.pipe';
+import { DmnamePipe } from './shared/pipes/dmname/dmname.pipe';
 
 
 @NgModule({
@@ -65,7 +68,10 @@ import { DirectMessageComponent } from './components/dashboard/directmessagebox/
     EditAccountComponent,
     GuestDirective,
     ContactComponent,
-    DirectMessageComponent
+    DirectMessageComponent,
+    DmpipePipe,
+    DmarrayPipe,
+    DmnamePipe
   ],
   imports: [
     BrowserModule,

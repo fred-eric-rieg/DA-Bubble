@@ -13,6 +13,13 @@ interface Channel {
   timestamp: number;
 }
 
+interface Directmessage {
+  [key: string]: {
+    members: { [id: string]: boolean };
+    timestamp: string;
+  };
+}
+
 @Injectable({
   providedIn: 'root'
 })
@@ -20,6 +27,7 @@ export class DatabaseService {
 
   userData: any = [];
   channelSubject = new BehaviorSubject<Channels>({});
+  directmessageSubject = new BehaviorSubject<Directmessage>({'placeholder': { members: { 'placeholder': true}, timestamp: ''}});
   messageData: any = [];
 
   constructor() { }
@@ -76,6 +84,17 @@ export class DatabaseService {
     onValue(reference, (snapshot) => {
       const data = snapshot.val();
       this.channelSubject.next(data);
+    });
+  }
+
+
+  async readAllDirectMessages() {
+    const db = getDatabase();
+    const reference = ref(db, 'directmessages/');
+
+    onValue(reference, (snapshot) => {
+      const data = snapshot.val();
+      this.directmessageSubject.next(data);
     });
   }
 }

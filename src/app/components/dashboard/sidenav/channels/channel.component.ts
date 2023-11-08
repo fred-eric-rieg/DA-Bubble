@@ -1,10 +1,12 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { DatabaseService } from 'src/app/shared/services/database/database.service';
-import { Subscription } from 'rxjs';
-import { ChannelService } from 'src/app/shared/services/channel/channel.service';
+import { Subscription, map } from 'rxjs';
 import { Router } from '@angular/router';
+import { getAuth } from '@angular/fire/auth';
+import { DirectmessagesService } from 'src/app/shared/services/directmessages/directmessages.service';
 
 let channelSub: Subscription;
+let directmessageSub: Subscription;
 
 interface Channels {
   [key: string]: Channel;
@@ -15,6 +17,13 @@ interface Channel {
   description: string;
   members: string[];
   timestamp: number;
+}
+
+interface Directmessage {
+  [key: string]: {
+    members: { [id: string]: boolean };
+    timestamp: string;
+  };
 }
 
 @Component({
@@ -31,14 +40,16 @@ export class ChannelComponent implements OnInit, OnDestroy {
   dmExpanded = false;
 
   constructor(
-    private ds: DatabaseService,
+    public ds: DatabaseService,
+    private dms: DirectmessagesService,
     private router: Router
-    ) {}
+  ) { }
 
 
   async ngOnInit() {
     console.log('ChannelComponent initialized');
     this.getChannelNamesAndIds();
+    this.getDirectMessageNamesAndIds();
   }
 
   ngOnDestroy() {
@@ -52,7 +63,7 @@ export class ChannelComponent implements OnInit, OnDestroy {
    */
   async getChannelNamesAndIds() {
     await this.ds.readAllChannels();
-    
+
     channelSub = this.ds.channelSubject.subscribe((data: Channels) => {
       this.channel = [];
       for (const key in data) {
@@ -67,6 +78,23 @@ export class ChannelComponent implements OnInit, OnDestroy {
         }
       }
     });
+  }
+
+
+  async getDirectMessageNamesAndIds() {
+    const auth = getAuth();
+    const uid: string = auth.currentUser?.uid || JSON.parse(localStorage.getItem('user') || '{}').uid;
+    await this.ds.readAllDirectMessages();
+
+    this.directmessages = this.ds.directmessageSubject.pipe(
+      map((data: { [key: string]: { members: { [id: string]: boolean }, timestamp: string } }) => {
+        Object.keys(data).map(key => ({
+          key: key,
+          members: data[key].members,
+          timestamp: data[key].timestamp
+        }))
+      })
+    );
   }
 
 
