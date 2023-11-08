@@ -18,10 +18,6 @@ interface Message {
 })
 export class DirectMessageComponent {
 
-  @HostListener('window:resize', ['$event'])
-  onResize(event: any) {
-    this.rs.screenWidth = window.innerWidth;
-  }
 
   origin: string = 'directmessage';
   dmId: string = '';
@@ -29,8 +25,7 @@ export class DirectMessageComponent {
   constructor(
     private route: ActivatedRoute,
     public dm: DirectmessagesService,
-    public ts: ToggleService,
-    public rs: ResizeService
+    public ts: ToggleService
   ) { }
 
   ngOnInit() {

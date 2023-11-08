@@ -4,7 +4,7 @@
 
     </div>
 
-    <div class="content" [class.overlay]="ts.toggled && rs.screenWidth < 600">
+    <div class="content">
 
         <!-- Individual Messages -->
         <app-message *ngFor="let message of ms.messages | async" [message]="message" class="block"

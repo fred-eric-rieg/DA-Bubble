@@ -1,7 +1,7 @@
 <app-toolbar></app-toolbar>
 <div class="main">
     <app-sidenav></app-sidenav>
-    <section class="mat-typography app-frame mat-app-background">
+    <section class="mat-typography app-frame mat-app-background" [class.overlay]="ts.toggled && rs.screenWidth < 600">
         <router-outlet></router-outlet>
     </section>
 </div>

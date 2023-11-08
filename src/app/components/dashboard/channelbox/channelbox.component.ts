@@ -28,10 +28,7 @@ interface Message {
 })
 export class ChannelboxComponent implements OnInit {
 
-  @HostListener('window:resize', ['$event'])
-  onResize(event: any) {
-    this.rs.screenWidth = window.innerWidth;
-  }
+  
 
   channel!: Channel;
 
@@ -42,7 +39,6 @@ export class ChannelboxComponent implements OnInit {
     public ts: ToggleService,
     public cs: ChannelService,
     public ms: MessageService,
-    public rs: ResizeService,
     private route: ActivatedRoute)
   {}
 
