@@ -1,5 +1,15 @@
-import { Component } from '@angular/core';
+import { Component, HostListener } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
+import { DirectmessagesService } from 'src/app/shared/services/directmessages/directmessages.service';
+import { ResizeService } from 'src/app/shared/services/resize/resize.service';
+import { ToggleService } from 'src/app/shared/services/sidenav/toggle.service';
+
+
+interface Message {
+  content?: string;
+  sender?: string;
+  timestamp?: number;
+}
 
 @Component({
   selector: 'app-direct-message',
@@ -8,12 +18,29 @@ import { ActivatedRoute } from '@angular/router';
 })
 export class DirectMessageComponent {
 
-  constructor(private route: ActivatedRoute) { }
+  @HostListener('window:resize', ['$event'])
+  onResize(event: any) {
+    this.rs.screenWidth = window.innerWidth;
+  }
+
+  origin: string = 'directmessage';
+  dmId: string = '';
+
+  constructor(
+    private route: ActivatedRoute,
+    public dm: DirectmessagesService,
+    public ts: ToggleService,
+    public rs: ResizeService
+  ) { }
 
   ngOnInit() {
     this.route.params.subscribe(params => {
-      console.log(params['id']);
+      this.dmId = params['id'];
+      this.dm.getMessages(params['id']);
     });
+  }
 
+  ngOnDestroy() {
+    console.log('DMcomponent destroyed');
   }
 }

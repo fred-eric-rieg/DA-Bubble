@@ -1,7 +1,7 @@
 <div class="flex-row">
-    <input placeholder="Message" [(ngModel)]="message" (keyup.enter)="sendMessage()">
+    <input placeholder="Message" [(ngModel)]="message" (keyup.enter)="sendMessage(origin)">
 
-    <button class="margin" mat-icon-button (click)="sendMessage()" [disabled]="message.length === 0">
+    <button class="margin" mat-icon-button (click)="sendMessage(origin)" [disabled]="message.length === 0">
         <mat-icon>send</mat-icon>
     </button>
 </div>

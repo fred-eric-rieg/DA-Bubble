@@ -4,6 +4,7 @@ import { Subscription, map } from 'rxjs';
 import { Router } from '@angular/router';
 import { getAuth } from '@angular/fire/auth';
 import { DirectmessagesService } from 'src/app/shared/services/directmessages/directmessages.service';
+import { UserService } from 'src/app/shared/services/user/user.service';
 
 let channelSub: Subscription;
 let directmessageSub: Subscription;
@@ -41,15 +42,15 @@ export class ChannelComponent implements OnInit, OnDestroy {
 
   constructor(
     public ds: DatabaseService,
-    private dms: DirectmessagesService,
+    private us: UserService,
     private router: Router
   ) { }
 
 
   async ngOnInit() {
-    console.log('ChannelComponent initialized');
     this.getChannelNamesAndIds();
     this.getDirectMessageNamesAndIds();
+    this.us.getContacts();
   }
 
   ngOnDestroy() {

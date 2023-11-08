@@ -19,7 +19,7 @@ export class ContactboxComponent {
     private dms: DirectmessagesService,
     private router: Router
   ) {
-    this.us.getContacts();
+    
   }
 
 

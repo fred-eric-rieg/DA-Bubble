@@ -35,6 +35,9 @@ export class ChannelboxComponent implements OnInit {
 
   channel!: Channel;
 
+  origin: string = 'channel';
+  channelId: string = '';
+
   constructor(
     public ts: ToggleService,
     public cs: ChannelService,
@@ -45,6 +48,7 @@ export class ChannelboxComponent implements OnInit {
 
   ngOnInit() {
     this.route.params.subscribe(params => {
+      this.channelId = params['id'];
       this.cs.loadChannel(params['id']);
       this.ms.getMessages(params['id']);
     });
@@ -57,9 +61,5 @@ export class ChannelboxComponent implements OnInit {
     console.log('ChannelboxComponent destroyed');
     channelSub.unsubscribe();
   }
-
-
-
-
 
 }

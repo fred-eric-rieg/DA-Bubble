@@ -65,9 +65,9 @@ export class MessageService {
 
     await push(reference, {
       content: message.content,
-      sender: this.auth.isLoggedIn()?.uid,
+      sender: message.sender,
       timestamp: message.timestamp,
-      channel: this.cs.id.value
+      channel: message.channel
     });
   }
 

@@ -1,4 +1,6 @@
-import { Component } from '@angular/core';
+import { Component, Input } from '@angular/core';
+import { AuthService } from 'src/app/shared/services/authentication/auth.service';
+import { DirectmessagesService } from 'src/app/shared/services/directmessages/directmessages.service';
 import { MessageService } from 'src/app/shared/services/message/message.service';
 
 interface Message {
@@ -6,6 +8,7 @@ interface Message {
   sender?: string;
   timestamp?: number;
   channel?: string;
+  directmessage?: string;
 }
 
 @Component({
@@ -16,19 +19,34 @@ interface Message {
 export class MessageInputComponent {
 
   message: string = '';
+  @Input() origin: string = '';
+  @Input() id: string = '';
 
-  constructor(private ms: MessageService) { }
+  constructor(
+    private ms: MessageService,
+    private dm: DirectmessagesService,
+    private auth: AuthService
+    ) { }
 
 
-  sendMessage() {
-    console.log(this.message);
-    this.ms.writeMessage({
-      content: this.message,
-      sender: 'William Wallace',
-      timestamp: Date.now(),
-      channel: ''
-    })
-    this.message = '';
+  sendMessage(origin: string) {
+    if (origin === 'channel') {
+      this.ms.writeMessage({
+        content: this.message,
+        sender: this.auth.isLoggedIn()?.uid,
+        timestamp: Date.now(),
+        channel: this.id
+      })
+      this.message = '';
+    } else {
+      this.dm.writeMessage({
+        content: this.message,
+        sender: this.auth.isLoggedIn()?.uid,
+        timestamp: Date.now(),
+        directmessage: this.id
+      })
+      this.message = '';
+    }
   }
 
 }

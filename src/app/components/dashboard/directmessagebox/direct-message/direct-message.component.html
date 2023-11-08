@@ -1,1 +1,20 @@
-<p>direct-message works!</p>
+<section>
+    <div class="header">
+        <span># Direct Message</span>
+
+    </div>
+
+    <div class="content" [class.overlay]="ts.toggled && rs.screenWidth < 600">
+
+        <!-- Individual Messages -->
+        <app-message *ngFor="let message of dm.messages | async" [message]="message" class="block"
+            [class.margin-message]="ts.toggled"></app-message>
+
+        <!-- Inputfield for Messages -->
+        <div class="input">
+            <app-message-input class="width-100" [class.margin]="ts.toggled" [origin]="origin" [id]="dmId"></app-message-input>
+        </div>
+
+    </div>
+
+</section>

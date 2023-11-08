@@ -1,11 +1,20 @@
 import { Injectable } from '@angular/core';
 import { getAuth } from '@angular/fire/auth';
-import { equalTo, get, getDatabase, limitToLast, orderByChild, push, query, ref } from '@angular/fire/database';
+import { equalTo, get, getDatabase, limitToLast, onValue, orderByChild, push, query, ref } from '@angular/fire/database';
+import { BehaviorSubject } from 'rxjs';
+import { AuthService } from '../authentication/auth.service';
 
 
 type Members = {
   [key: string]: boolean;
 };
+
+interface Message {
+  content?: string;
+  sender?: string;
+  timestamp?: number;
+  directmessage?: string;
+}
 
 
 @Injectable({
@@ -13,7 +22,10 @@ type Members = {
 })
 export class DirectmessagesService {
 
-  constructor() { }
+  messages = new BehaviorSubject<Message[]>([]);
+
+
+  constructor(private auth: AuthService) { }
 
   async getDirectMessages() {
     const auth = getAuth();
@@ -82,4 +94,48 @@ export class DirectmessagesService {
 
     return key.key;
   }
+
+
+  async getMessages(directmessageId: string) {
+    const db = getDatabase();
+    const messagesRef = ref(db, 'messages/');
+    const messagesQuery = query(messagesRef, orderByChild('directmessage'), equalTo(directmessageId), limitToLast(20));
+
+    onValue(messagesQuery, (snapshot) => {
+      if (snapshot.exists()) {
+        const data = snapshot.val();
+        let messages: Message[] = [];
+        for (const key in data) {
+          if (data.hasOwnProperty(key)) {
+            const element = data[key];
+            messages.push(element);
+          }
+        }
+        this.messages.next(messages);
+      } else {
+        this.messages.next([
+          {
+            content: 'They may take our data, but they\'ll never take our freedom!',
+            sender: 'William Wallace',
+            timestamp: 0
+          }
+        ]);
+      }
+    });
+  }
+
+
+  async writeMessage(message: Message) {
+    const db = getDatabase();
+    const reference = ref(db, 'messages/');
+    console.log("Writing message: ", message);
+
+    await push(reference, {
+      content: message.content,
+      sender: message.sender,
+      timestamp: message.timestamp,
+      directmessage: message.directmessage
+    });
+  }
+
 }
