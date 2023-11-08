@@ -1,4 +1,10 @@
 <section>
     <h1>Contacts</h1>
-</section>
 
+    <div class="flex-row">
+        <app-contact *ngFor="let contact of us.contacts | async" [contact]="contact"
+        (mouseenter)="askDirectMessage($event)" (mouseleave)="removeMessage()"
+        (click)="startDirectMessage(contact)"></app-contact>
+    </div>
+
+</section>

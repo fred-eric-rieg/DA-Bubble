@@ -40,7 +40,32 @@ export class UserService {
     profile: ''
   });
 
+  contacts = new BehaviorSubject<Account[]>([]);
+
   constructor() {
+  }
+
+
+  async getContacts() {
+    const auth = getAuth();
+    const db = getDatabase();
+    const userRef = ref(db, 'users/');
+    const userQuery = query(userRef, orderByChild('id') ,limitToLast(10));
+
+    onValue(userQuery, (snapshot) => {
+      if (snapshot.exists()) {
+        const data = snapshot.val();
+        let contacts: Account[] = [];
+        for (let key in data) {
+          if (data[key].id != auth.currentUser?.uid) {
+            contacts.push(data[key]);
+          }
+        }
+        this.contacts.next(contacts);
+      } else {
+        console.log('Contacts not found');
+      }
+    });
   }
 
 

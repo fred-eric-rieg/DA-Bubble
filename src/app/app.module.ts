@@ -39,6 +39,8 @@ import { ResetComponent } from './components/login/reset/reset/reset.component';
 import { AccountComponent } from './components/dashboard/accountbox/account/account.component';
 import { EditAccountComponent } from './components/dialogs/edit-account/edit-account.component';
 import { GuestDirective } from './directives/guest.directive';
+import { ContactComponent } from './components/dashboard/contactbox/contact/contact.component';
+import { DirectMessageComponent } from './components/dashboard/directmessagebox/direct-message/direct-message.component';
 
 
 @NgModule({
@@ -61,7 +63,9 @@ import { GuestDirective } from './directives/guest.directive';
     ResetComponent,
     AccountComponent,
     EditAccountComponent,
-    GuestDirective
+    GuestDirective,
+    ContactComponent,
+    DirectMessageComponent
   ],
   imports: [
     BrowserModule,
