@@ -8,21 +8,24 @@
 
         <!-- Messages sorted by date -->
         <app-message *ngFor="let message of ms.messages | async | day: 'before'" [message]="message" class="block"
-            [class.margin-message]="ts.toggled"></app-message>
+            [class.margin-message]="ts.toggled" matTooltip="Reply in thread"
+            (click)="replyInThread(message)"></app-message>
 
         <div class="line" *ngIf="(ms.messages | async | day: 'before').length > 0">
             <span class="date">Before {{ before | date: "dd.MM.yyyy hh a" }} </span>
         </div>
 
         <app-message *ngFor="let message of ms.messages | async | day: 'yesterday'" [message]="message" class="block"
-            [class.margin-message]="ts.toggled"></app-message>
+            [class.margin-message]="ts.toggled" matTooltip="Reply in thread"
+            (click)="replyInThread(message)"></app-message>
 
         <div class="line" *ngIf="(ms.messages | async | day: 'yesterday').length > 0">
             <span class="date">Yesterday</span>
         </div>
 
         <app-message *ngFor="let message of ms.messages | async | day: 'today'" [message]="message" class="block"
-            [class.margin-message]="ts.toggled"></app-message>
+            [class.margin-message]="ts.toggled" matTooltip="Reply in thread"
+            (click)="replyInThread(message)"></app-message>
 
         <div class="line" *ngIf="(ms.messages | async | day: 'today').length > 0">
             <span class="date">Today</span>

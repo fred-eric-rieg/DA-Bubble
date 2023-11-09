@@ -24,6 +24,7 @@ const routes: Routes = [
     { path: 'channel/:id', component: ChannelboxComponent, canActivate: [authGuard] },
     { path: 'directmessage/:id', component: DirectMessageComponent, canActivate: [authGuard] },
     { path: 'threads', component: ThreadboxComponent, canActivate: [authGuard] },
+    { path: 'threads/:id', component: ThreadboxComponent, canActivate: [authGuard] },
     { path: 'contacts', component: ContactboxComponent, canActivate: [authGuard] },
     { path: 'account', component: AccountComponent, canActivate: [authGuard] },
     { path: '', component: AccountComponent, canActivate: [authGuard] }

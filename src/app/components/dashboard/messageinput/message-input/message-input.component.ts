@@ -9,6 +9,8 @@ interface Message {
   timestamp?: number;
   channel?: string;
   directmessage?: string;
+  thread?: string;
+  isThread?: boolean;
 }
 
 @Component({
@@ -35,17 +37,29 @@ export class MessageInputComponent {
         content: this.message,
         sender: this.auth.isLoggedIn()?.uid,
         timestamp: Date.now(),
-        channel: this.id
+        channel: this.id,
+        isThread: false
       })
       this.message = '';
-    } else {
+    } else if (origin === 'directmessage'){
       this.dm.writeMessage({
         content: this.message,
         sender: this.auth.isLoggedIn()?.uid,
         timestamp: Date.now(),
-        directmessage: this.id
+        directmessage: this.id,
+        isThread: false
       })
       this.message = '';
+    } else {
+      this.ms.writeMessage({
+        content: this.message,
+        sender: this.auth.isLoggedIn()?.uid,
+        timestamp: Date.now(),
+        thread: this.id,
+        isThread: false
+      })
+      this.message = '';
+      this.ms.upgradeToThread(this.id);
     }
   }
 

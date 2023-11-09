@@ -1,8 +1,9 @@
 <mat-toolbar color="primary">
+    <span class="title">DA Bubble</span>
     <button mat-icon-button class="example-icon" aria-label="Example icon-button with menu icon" (click)="ts.toggle()">
-        <mat-icon>menu</mat-icon>
+        <mat-icon *ngIf="ts.toggled">chevron_left</mat-icon>
+        <mat-icon *ngIf="!ts.toggled">chevron_right</mat-icon>
     </button>
-    <span>DA Bubble</span>
     <span class="example-spacer"></span>
     <span class="greeting">Welcome, {{ user | async }}</span>
     <button mat-raised-button aria-label="Send" (click)="logOut()">

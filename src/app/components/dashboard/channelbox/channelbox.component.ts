@@ -1,5 +1,5 @@
-import { Component, HostListener, OnInit } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { Component, OnInit } from '@angular/core';
+import { ActivatedRoute, Router } from '@angular/router';
 import { Subscription } from 'rxjs';
 import { ChannelService } from 'src/app/shared/services/channel/channel.service';
 import { MessageService } from 'src/app/shared/services/message/message.service';
@@ -16,6 +16,7 @@ interface Channel {
 }
 
 interface Message {
+  id?: string;
   content?: string;
   sender?: string;
   timestamp?: number;
@@ -41,7 +42,8 @@ export class ChannelboxComponent implements OnInit {
     public ts: ToggleService,
     public cs: ChannelService,
     public ms: MessageService,
-    private route: ActivatedRoute)
+    private route: ActivatedRoute,
+    private router: Router)
   {}
 
   ngOnInit() {
@@ -56,8 +58,13 @@ export class ChannelboxComponent implements OnInit {
   }
 
   ngOnDestroy() {
-    console.log('ChannelboxComponent destroyed');
     channelSub.unsubscribe();
+  }
+
+
+  replyInThread(message: Message) {
+    console.log("Opening message: ", message);
+    this.router.navigate(['/dashboard/threads', message.id]);
   }
 
 }

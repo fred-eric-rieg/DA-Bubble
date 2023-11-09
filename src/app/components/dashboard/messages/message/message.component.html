@@ -5,8 +5,9 @@
         <div class="flex-row">
             <span class="sender" *ngIf="message.sender != 'William Wallace'">{{ (user | async)?.name + ' ' + (user | async)?.surname }}</span>
             <span class="sender" *ngIf="message.sender == 'William Wallace' ">{{ message.sender }}</span>
-            <span class="time">{{ message.timestamp | date: 'shortTime' }}</span>
+            <span class="time" [matTooltip]="(message.timestamp | date: 'medium') || 'created at'">{{ message.timestamp | date: 'shortTime' }}</span>
         </div>
         <p class="message">{{ message.content }}</p>
+        <span class="reply" *ngIf="message.isThread">{{ replies | async }} replies</span>
     </div>
 </div>

@@ -14,6 +14,7 @@ interface Message {
   sender?: string;
   timestamp?: number;
   directmessage?: string;
+  isThread?: boolean;
 }
 
 

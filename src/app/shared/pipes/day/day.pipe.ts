@@ -1,10 +1,12 @@
 import { Pipe, PipeTransform } from '@angular/core';
 
 interface Message {
+  id?: string;
   content?: string;
   sender?: string;
   timestamp?: number;
   channel?: string;
+  isThread?: boolean;
 }
 
 @Pipe({
@@ -27,10 +29,8 @@ export class DayPipe implements PipeTransform {
       let yesterday = Date.now() - 86400000;
       // get midnight of yesterday
       let start = new Date(yesterday).setHours(0,0,0,0);
-      console.log(start);
       // get start of yesterday
       let end = new Date(Date.now()).setHours(0,0,0,0);
-      console.log(end);
       value.forEach((message: Message) => {
         if ( Number(message.timestamp) >= start && Number(message.timestamp) < end) { days.push(message) }
       });
