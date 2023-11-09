@@ -13,6 +13,8 @@ export class ContactboxComponent {
   message = false;
   messageObject: any = {};
 
+  search = '';
+
   constructor(
     public us: UserService,
     private renderer: Renderer2,

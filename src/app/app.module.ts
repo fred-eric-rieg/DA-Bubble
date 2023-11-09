@@ -44,6 +44,7 @@ import { DirectMessageComponent } from './components/dashboard/directmessagebox/
 import { DmpipePipe } from './shared/pipes/dmpipe/dmpipe.pipe';
 import { DmarrayPipe } from './shared/pipes/dmarray/dmarray.pipe';
 import { DmnamePipe } from './shared/pipes/dmname/dmname.pipe';
+import { SearchPipe } from './shared/pipes/search/search.pipe';
 
 
 @NgModule({
@@ -71,7 +72,8 @@ import { DmnamePipe } from './shared/pipes/dmname/dmname.pipe';
     DirectMessageComponent,
     DmpipePipe,
     DmarrayPipe,
-    DmnamePipe
+    DmnamePipe,
+    SearchPipe
   ],
   imports: [
     BrowserModule,
