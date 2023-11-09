@@ -3,5 +3,5 @@
     <p>Name: <b>{{ contact.name }}</b></p>
     <p>Surname: <b>{{ contact.surname }}</b></p>
     <p>Email: <b>{{ contact.email }}</b></p>
-    <p>Created: {{ contact.timestamp }}</p>
+    <span>Created: {{ contact.timestamp | date: 'medium' }}</span>
 </div>
