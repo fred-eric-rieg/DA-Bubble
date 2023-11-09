@@ -1,7 +1,8 @@
 import { Injectable } from '@angular/core';
-import { getAuth, sendEmailVerification, updateEmail } from '@angular/fire/auth';
+import { getAuth } from '@angular/fire/auth';
 import { equalTo, getDatabase, limitToLast, onValue, orderByChild, query, ref, set, update } from '@angular/fire/database';
 import { BehaviorSubject } from 'rxjs';
+import { StorageService } from '../storage/storage.service';
 
 interface channel {
   id: string;
@@ -42,7 +43,7 @@ export class UserService {
 
   contacts = new BehaviorSubject<Account[]>([]);
 
-  constructor() {
+  constructor(private ss: StorageService) {
   }
 
 
@@ -148,6 +149,38 @@ export class UserService {
     });
   }
 
+  /**
+   * Before updating the picture, we check if the file is a picture and if it's size is lower than 1MB.
+   * Then the metadata as well as the path are set and send to the storage service.
+   * The path is then returned async and updated in the user's realtime database.
+   */
+  async updatePicture(picture: File, accountId: string) {
+    if (picture.size > 1000000) {
+      this.writeMessage('File size must be lower than 1MB');
+      return;
+    }
+    if (picture.type != 'image/jpg' && picture.type != 'image/jpeg' && picture.type != 'image/png') {
+      this.writeMessage('File type must be .jpg .jpeg or .png');
+      return;
+    }
+
+    const metadata = { contentType: picture.type };
+    let ending = picture.type.split('/')[1];
+    let path = '';
+    path = await this.ss.uploadPicture(picture, 'users/' + accountId + '/profile.' + ending , metadata);
+
+
+    const db = getDatabase();
+    const userRef = ref(db, 'users/' + accountId);
+
+    await update(userRef, {
+      profile: path
+    }).then(() => {
+      this.writeMessage('Picture updated!');
+    }).catch((error) => {
+      this.writeMessage(error.message);
+    });
+  }
 
   // This method is used to display a message on the bottom of the screen
   writeMessage(text: string) {

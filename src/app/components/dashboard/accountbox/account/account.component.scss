@@ -11,9 +11,10 @@ section {
 }
 
 .profile {
+    cursor: pointer;
     height: 64px;
     width: 64px;
-    object-fit: cover;
+    object-fit: contain;
     background-color: #303030;
     border-radius: 0.5rem;
     margin-bottom: 1rem;

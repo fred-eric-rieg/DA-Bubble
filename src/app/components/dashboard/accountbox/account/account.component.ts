@@ -2,6 +2,7 @@ import { Component, OnDestroy } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { Subscription } from 'rxjs';
 import { EditAccountComponent } from 'src/app/components/dialogs/edit-account/edit-account.component';
+import { EditPictureComponent } from 'src/app/components/dialogs/edit-picture/edit-picture/edit-picture.component';
 import { UserService } from 'src/app/shared/services/user/user.service';
 
 interface Account {
@@ -63,6 +64,19 @@ export class AccountComponent implements OnDestroy {
     dialogRef.afterClosed().subscribe(result => {
       if (!result) { return } // If the user clicks cancel, do nothing.
       this.us.updateAccount(result);
+    });
+  }
+
+
+  openEditPictureDialog(): void {
+    const dialogRef = this.dialog.open(EditPictureComponent, {
+      width: '300px',
+      data: this.account.id
+    });
+
+    dialogRef.afterClosed().subscribe(result => {
+      if (!result) { return } // If the user clicks cancel, do nothing.
+      this.us.updatePicture(result, this.account.id);
     });
   }
 

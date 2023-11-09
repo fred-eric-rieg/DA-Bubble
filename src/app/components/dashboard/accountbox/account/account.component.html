@@ -2,7 +2,7 @@
     <h1>Your Account</h1>
 
     <div class="flex-row">
-        <img class="profile" [src]="account.profile" alt="profile picture">
+        <img class="profile" [src]="account.profile" alt="profile picture" (click)="openEditPictureDialog()" matTooltip="Change profile picture">
         <p
             *ngIf="account.profile == 'https://firebasestorage.googleapis.com/v0/b/db-bubble.appspot.com/o/giant-tree-frog-942682_640.jpg?alt=media&token=c3489da1-2462-4486-8e01-b370996c35f5'">
             Image by <a

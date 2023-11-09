@@ -47,6 +47,7 @@ import { DmarrayPipe } from './shared/pipes/dmarray/dmarray.pipe';
 import { DmnamePipe } from './shared/pipes/dmname/dmname.pipe';
 import { SearchPipe } from './shared/pipes/search/search.pipe';
 import { DayPipe } from './shared/pipes/day/day.pipe';
+import { EditPictureComponent } from './components/dialogs/edit-picture/edit-picture/edit-picture.component';
 
 
 @NgModule({
@@ -76,7 +77,8 @@ import { DayPipe } from './shared/pipes/day/day.pipe';
     DmarrayPipe,
     DmnamePipe,
     SearchPipe,
-    DayPipe
+    DayPipe,
+    EditPictureComponent
   ],
   imports: [
     BrowserModule,
