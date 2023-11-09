@@ -28,7 +28,9 @@ interface Message {
 })
 export class ChannelboxComponent implements OnInit {
 
-  
+  today: number = Date.now();
+  yesterday: number = Date.now() - 86400000;
+  before: number = new Date(Date.now() - 86400000 * 2).setHours(0,0,0,0);
 
   channel!: Channel;
 

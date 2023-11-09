@@ -1,4 +1,4 @@
-<div class="flex-row hovering">
+<div class="flex-row hovering box">
     <img class="profile" *ngIf="message.sender != 'William Wallace'" src="{{ (user | async)?.profile }}" alt="sender profile picture">
     <img class="profile" *ngIf="message.sender == 'William Wallace' " src="../../../../../assets/icons/icon-72x72.png" alt="default profile picture">
     <div class="flex-column">

@@ -45,6 +45,7 @@ import { DmpipePipe } from './shared/pipes/dmpipe/dmpipe.pipe';
 import { DmarrayPipe } from './shared/pipes/dmarray/dmarray.pipe';
 import { DmnamePipe } from './shared/pipes/dmname/dmname.pipe';
 import { SearchPipe } from './shared/pipes/search/search.pipe';
+import { DayPipe } from './shared/pipes/day/day.pipe';
 
 
 @NgModule({
@@ -73,7 +74,8 @@ import { SearchPipe } from './shared/pipes/search/search.pipe';
     DmpipePipe,
     DmarrayPipe,
     DmnamePipe,
-    SearchPipe
+    SearchPipe,
+    DayPipe
   ],
   imports: [
     BrowserModule,
