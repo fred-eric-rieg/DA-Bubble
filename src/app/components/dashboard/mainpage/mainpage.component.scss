@@ -4,7 +4,6 @@
     height: 100vh;
     width: 100%;
     overflow-x: hidden;
-    overflow-y: hidden;
 }
 
 section {
@@ -16,6 +15,7 @@ section {
 }
 
 .overlay {
-    opacity: 0.75;
+    display: block;
+    opacity: 0;
     z-index: -1;
 }
