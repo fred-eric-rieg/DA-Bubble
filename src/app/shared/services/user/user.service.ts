@@ -119,11 +119,14 @@ export class UserService {
     let funnyRandomName = ['Misterious', 'Funny', 'Crazy', 'Silly', 'Clever', 'Smart', 'Dumb', 'Stupid', 'Crazy', 'Lazy', 'Sleepy', 'Hungry', 'Angry', 'Happy', 'Sad', 'Silly', 'Clever', 'Smart', 'Dumb', 'Stupid', 'Crazy', 'Lazy', 'Sleepy', 'Hungry', 'Angry', 'Happy', 'Sad', 'Silly', 'Clever', 'Smart', 'Dumb', 'Stupid', 'Crazy', 'Lazy', 'Sleepy', 'Hungry', 'Angry', 'Happy', 'Sad', 'Silly', 'Clever', 'Smart', 'Dumb', 'Stupid', 'Crazy', 'Lazy', 'Sleepy', 'Hungry', 'Angry', 'Happy', 'Sad', 'Silly', 'Clever', 'Smart', 'Dumb', 'Stupid', 'Crazy', 'Lazy', 'Sleepy', 'Hungry', 'Angry', 'Happy', 'Sad', 'Silly', 'Clever', 'Smart', 'Dumb', 'Stupid', 'Crazy', 'Lazy', 'Sleepy', 'Hungry', 'Angry', 'Happy', 'Sad'];
     let funnyRandomSurname = ['X', 'Y', 'Z', 'A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'X', 'Y', 'Z', 'A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'X', 'Y', 'Z', 'A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'X', 'Y', 'Z', 'A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'X', 'Y', 'Z', 'A', 'B', 'C', 'D', 'E', 'F', 'G', 'H'];
 
+    let name = funnyRandomName[Math.floor(Math.random() * funnyRandomName.length)];
+    let surname = funnyRandomSurname[Math.floor(Math.random() * funnyRandomSurname.length)];
+
     await set(userRef, {
       id: user.id,
-      name: funnyRandomName[Math.floor(Math.random() * funnyRandomName.length)],
-      surname: funnyRandomSurname[Math.floor(Math.random() * funnyRandomSurname.length)],
-      email: user.email,
+      name: name,
+      surname: surname,
+      email: name.toLowerCase() + '@' + surname.toLowerCase() + '.com',
       channels: [],
       timestamp: user.timestamp,
       profile: 'https://firebasestorage.googleapis.com/v0/b/db-bubble.appspot.com/o/giant-tree-frog-942682_640.jpg?alt=media&token=c3489da1-2462-4486-8e01-b370996c35f5' // default profile picture
