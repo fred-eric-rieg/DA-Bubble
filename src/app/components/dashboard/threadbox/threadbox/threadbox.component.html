@@ -1,6 +1,10 @@
 <section>
-    <h1 *ngIf="!threadId">Threads</h1>
-    <h1 *ngIf="threadId">Thread</h1>
+    <div class="header">
+        <span *ngIf="!threadId">Threads</span>
+        <span *ngIf="threadId">Thread</span>
+
+    </div>
+
 
     <div class="content" *ngIf="!threadId">
 

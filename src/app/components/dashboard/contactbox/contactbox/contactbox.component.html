@@ -1,15 +1,23 @@
 <section>
-    <h1>Contacts</h1>
-
-    <mat-form-field>
-        <mat-label>Search contact</mat-label>
-        <input matInput type="text" [(ngModel)]="search">
-    </mat-form-field>
-
-    <div class="flex-row">
-        <app-contact *ngFor="let contact of us.contacts | async | search:search" [contact]="contact"
-        (mouseenter)="askDirectMessage($event)" (mouseleave)="removeMessage()"
-        (click)="startDirectMessage(contact)"></app-contact>
+    <div class="header">
+        <span>Contacts</span>
     </div>
+
+    <div class="content">
+        
+        <mat-form-field class="width-300">
+            <mat-label>Search contact</mat-label>
+            <input matInput type="text" [(ngModel)]="search">
+        </mat-form-field>
+    
+        <div class="flex-row">
+            <app-contact *ngFor="let contact of us.contacts | async | search:search" [contact]="contact"
+            (mouseenter)="askDirectMessage($event)" (mouseleave)="removeMessage()"
+            (click)="startDirectMessage(contact)"></app-contact>
+        </div>
+
+    </div>
+
+    
 
 </section>
