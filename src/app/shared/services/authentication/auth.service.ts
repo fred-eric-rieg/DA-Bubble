@@ -19,7 +19,7 @@ export class AuthService {
     return createUserWithEmailAndPassword(auth, email, password)
       .then((userCredential) => {
         const user = userCredential.user;
-        this.us.createUser({ id: user.uid, email: user.email || '', timestamp: Date.now() });
+        this.us.createUser({ id: user.uid, email: 'hidden@data.protection' || '', timestamp: Date.now() });
         this.writeMessage('Account created!');
         return 'success';
       })
