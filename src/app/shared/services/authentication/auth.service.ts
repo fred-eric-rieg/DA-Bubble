@@ -32,24 +32,6 @@ export class AuthService {
   }
 
 
-  async loginAnonymous() {
-    const auth = getAuth();
-    return signInAnonymously(auth)
-    .then((userCredential) => {
-      const user = userCredential.user;
-      this.us.createUser({ id: user.uid, email: 'guest@user.de', timestamp: Date.now() });
-      this.writeMessage('Logged in!');
-      return 'success';
-    })
-    .catch((error) => {
-      const errorCode = error.code;
-      const errorMessage = error.message;
-      this.writeMessage(errorMessage);
-      return 'error';
-    });
-  }
-
-
   async logInNormal(email: string, password: string) {
     const auth = getAuth();
     setPersistence(auth, browserSessionPersistence)
