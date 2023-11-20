@@ -39,7 +39,6 @@ import { RegisterComponent } from './components/login/register/register/register
 import { ResetComponent } from './components/login/reset/reset/reset.component';
 import { AccountComponent } from './components/dashboard/accountbox/account/account.component';
 import { EditAccountComponent } from './components/dialogs/edit-account/edit-account.component';
-import { GuestDirective } from './directives/guest.directive';
 import { ContactComponent } from './components/dashboard/contactbox/contact/contact.component';
 import { DirectMessageComponent } from './components/dashboard/directmessagebox/direct-message/direct-message.component';
 import { DmpipePipe } from './shared/pipes/dmpipe/dmpipe.pipe';
@@ -70,7 +69,6 @@ import { EditPictureComponent } from './components/dialogs/edit-picture/edit-pic
     ResetComponent,
     AccountComponent,
     EditAccountComponent,
-    GuestDirective,
     ContactComponent,
     DirectMessageComponent,
     DmpipePipe,
